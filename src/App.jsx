@@ -7,6 +7,7 @@ import Layout from "./Pages/Layout";
 import NotFound from "./Pages/NotFound";
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
+import ProductDetails from "./Pages/ProductDetails";
 
 function App() {
   const routes = [
@@ -15,9 +16,10 @@ function App() {
       element: <Layout />,
       children: [
         { path: "", element: <Home /> },
-        { path: "shop", element: <Shop /> },
+        { path: "shop", element: <Shop />},
         { path: "login", element: <Login /> },
-        { path: "register", element: <Register /> },
+        { path: "register", element: <Register /> },  
+        {  path: "shop/product/:id", element: <ProductDetails /> },
         { path: "*", element: <NotFound /> },
       ],
     },

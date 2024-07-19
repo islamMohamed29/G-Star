@@ -434,7 +434,8 @@ export default function Shop() {
                     <>
                       <div className="col-md-3">
                         <div key={index} className="product">
-                          <img
+                        <Link to={`/shop/product/312312312`}>
+                        <img
                             src={`/products/product-1/${product.mainImage}`}
                             alt={`${product.name}`}
                             className="main-image"
@@ -452,7 +453,7 @@ export default function Shop() {
                             }`}
                             className="hover-image"
                             // alt  // product.name or currnetColor alt name
-                          />
+                          /></Link>
                           <div className="product-status"></div>
                           <div className="about-product">
                             <div className="status">NEW</div>
