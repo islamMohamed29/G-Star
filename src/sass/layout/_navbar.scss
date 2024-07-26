@@ -20,6 +20,7 @@ nav .nav-container .nav-right {
   display: flex;
   align-items: center;
   column-gap: 15px;
+  height: 100%;
 }
 nav .nav-container .nav-right .search {
   display: none;
@@ -155,6 +156,198 @@ nav .nav-container .bars-container.change .bar:nth-child(2) {
 }
 nav .nav-container .bars-container.change .bar:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
+}
+
+nav .nav-container .nav-right .cart,
+nav .nav-container .nav-right .whishlist {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: 0 14px;
+}
+
+nav .nav-container .nav-right .cart .shopping-cart,
+nav .nav-container .nav-right .whishlist .user_wishlist {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 0 10px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+
+nav .nav-container .nav-right .cart .shopping-cart .cart_icon,
+nav .nav-container .nav-right .whishlist .user_wishlist .wishlist_icon {
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+nav .nav-container .nav-right .cart:hover .shopping_cart_panel,
+nav .nav-container .nav-right .whishlist:hover .wishlist_panel {
+  display: block;
+  user-select: text;
+}
+
+nav .nav-container .nav-right .cart .shopping-cart:hover .cart_icon,
+nav .nav-container .nav-right .whishlist:hover .wishlist_icon {
+  color: #aaa;
+}
+nav
+  .nav-container
+  .nav-right
+  .cart
+  .shopping-cart
+  .shopping_cart_panel
+  .wrapper,
+nav .nav-container .nav-right .whishlist .wishlist_panel .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+nav
+  .nav-container
+  .nav-right
+  .cart
+  .shopping-cart
+  .shopping_cart_panel
+  .wrapper
+  .cart_empty,
+nav
+  .nav-container
+  .nav-right
+  .whishlist
+  .wishlist_panel
+  .wrapper
+  .text_loginFirst {
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+}
+nav
+  .nav-container
+  .nav-right
+  .cart
+  .shopping-cart
+  .shopping_cart_panel
+  .wrapper
+  .btn_large,
+nav .nav-container .nav-right .whishlist .wishlist_panel .wrapper .btn_large {
+  background-color: #00385f;
+  color: #fff;
+  font-weight: 500;
+  outline: none;
+  border: 2px solid #00385f;
+  padding: 8px 20px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+nav
+  .nav-container
+  .nav-right
+  .cart
+  .shopping-cart
+  .shopping_cart_panel
+  .wrapper
+  .btn_large
+  p,
+nav .nav-container .nav-right .whishlist .wishlist_panel .wrapper .btn_large p {
+  margin: 0;
+}
+
+nav
+  .nav-container
+  .nav-right
+  .cart
+  .shopping-cart
+  .shopping_cart_panel
+  .wrapper
+  .btn_large:hover,
+nav
+  .nav-container
+  .nav-right
+  .whishlist
+  .wishlist_panel
+  .wrapper
+  .btn_large:hover {
+  background-color: transparent;
+  color: #000;
+}
+nav .nav-container .nav-right .cart .shopping-cart .shopping_cart_panel,
+nav .nav-container .nav-right .whishlist .wishlist_panel {
+  position: absolute;
+  top: 54px;
+  right: -34px;
+  width: 400px;
+  // height: 160px;
+  background-color: #fff;
+  display: none;
+  cursor: default;
+}
+nav .nav-container .nav-right .cart .shopping-cart .shopping_cart_panel {
+  height: 160px;
+}
+
+nav .nav-container .nav-right .cart .shopping-cart:hover .shopping_cart_panel,
+nav .nav-container .nav-right .whishlist:hover .wishlist_panel {
+  display: block;
+}
+
+nav .nav-container .nav-right .whishlist .wishlist_panel {
+  padding: 20px 30px;
+}
+nav
+  .nav-container
+  .nav-right
+  .whishlist
+  .wishlist_panel
+  .wrapper
+  .text_loginFirst {
+  font-weight: bold;
+}
+nav
+  .nav-container
+  .nav-right
+  .whishlist
+  .wishlist_panel
+  .wrapper
+  .text_loginFirst.gray {
+  color: #aaa;
+  font-weight: normal;
+}
+nav
+  .nav-container
+  .nav-right
+  .whishlist
+  .wishlist_panel
+  .wrapper
+  .btn_large.full_Width {
+  width: 100%;
+  margin-bottom: 10px;
+}
+nav
+  .nav-container
+  .nav-right
+  .whishlist
+  .wishlist_panel
+  .wrapper
+  .btn_large.full_Width.gray {
+  background-color: transparent;
+  border-color: #aaa;
+  color: #aaa;
+  &:hover {
+    color: #000;
+    border-color: #000;
+  }
 }
 
 .sidebar {

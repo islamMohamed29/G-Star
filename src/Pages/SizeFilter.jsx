@@ -32,12 +32,13 @@ const SizeFilter = ({ setFilters }) => {
       >
         Size
       </button>
-      <ul className="dropdown-menu">
+      <ul className="dropdown-menu parentFilterPanel">
         <li>
           <input
             type="checkbox"
-            name="size28CheckBox"
+            name="28"
             id="size28CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size28CheckBox">28</label>
@@ -47,6 +48,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="29"
             id="size29CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size29CheckBox">29</label>
@@ -56,6 +58,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="30"
             id="size30CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size30CheckBox">30</label>
@@ -65,6 +68,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="31"
             id="size31CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size31CheckBox">31</label>
@@ -74,6 +78,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="32"
             id="size32CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size32CheckBox">32</label>
@@ -83,6 +88,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="33"
             id="size33CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size33CheckBox">33</label>
@@ -92,6 +98,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="34"
             id="size34CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size34CheckBox">34</label>
@@ -101,6 +108,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="36"
             id="size36CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size36CheckBox">36</label>
@@ -110,6 +118,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="38"
             id="size38CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size38CheckBox">38</label>
@@ -119,6 +128,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="40"
             id="size40CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size40CheckBox">40</label>
@@ -128,6 +138,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="41"
             id="size41CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size41CheckBox">41</label>
@@ -137,6 +148,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="42"
             id="size42CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size42CheckBox">42</label>
@@ -146,6 +158,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="43"
             id="size43CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size43CheckBox">43</label>
@@ -155,6 +168,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="44"
             id="size44CheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="size44CheckBox">44</label>
@@ -164,6 +178,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="xxxSmallCheckBox"
             id="xxxSmallCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="xxxSmallCheckBox">XXXS</label>
@@ -173,6 +188,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="xxSmallCheckBox"
             id="xxSmallCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="xxSmallCheckBox">XXS</label>
@@ -182,6 +198,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="xSmallCheckBox"
             id="xSmallCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="xSmallCheckBox">XS</label>
@@ -191,6 +208,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="smallCheckBox"
             id="smallCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="smallCheckBox">S</label>
@@ -200,6 +218,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="mediumCheckBox"
             id="mediumCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="mediumCheckBox">M</label>
@@ -209,6 +228,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="largeCheckBox"
             id="largeCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="largeCheckBox">L</label>
@@ -218,6 +238,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="xLargeCheckBox"
             id="xLargeCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="xLargeCheckBox">XL</label>
@@ -227,6 +248,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="xxLargeCheckBox"
             id="xxLargeCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="xxLargeCheckBox">XXL</label>
@@ -236,6 +258,7 @@ const SizeFilter = ({ setFilters }) => {
             type="checkbox"
             name="oneSizeCheckBox"
             id="oneSizeCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="oneSizeCheckBox">one size</label>

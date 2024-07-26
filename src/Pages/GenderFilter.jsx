@@ -7,12 +7,10 @@ const GenderFilter = ({ setFilters }) => {
       let updatedGenderFilters;
 
       if (checked) {
-        // Add the selected gender to the array if it's not already there
         updatedGenderFilters = prevFilters.gender.includes(name)
           ? prevFilters.gender
           : [...prevFilters.gender, name];
       } else {
-        // Remove the selected gender from the array
         updatedGenderFilters = prevFilters.gender.filter(
           (gender) => gender !== name
         );
@@ -37,7 +35,7 @@ const GenderFilter = ({ setFilters }) => {
         Gender
       </button>
       <ul
-        className="dropdown-menu dropdown-menu-start"
+        className="dropdown-menu parentFilterPanel dropdown-menu-start"
         aria-labelledby="genderDropdown"
       >
         <li>
@@ -45,6 +43,7 @@ const GenderFilter = ({ setFilters }) => {
             type="checkbox"
             name="men"
             id="menCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="menCheckBox">Men</label>
@@ -55,6 +54,7 @@ const GenderFilter = ({ setFilters }) => {
             type="checkbox"
             name="women"
             id="womenCheckBox"
+            className="filterCheckBox"
             onChange={handleCheckBoxChange}
           />
           <label htmlFor="womenCheckBox">Women</label>

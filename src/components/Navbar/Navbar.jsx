@@ -72,10 +72,45 @@ export default function Navbar() {
               <Link to="login">Login</Link>
             </div>
             <div className="whishlist">
-              <i className="fa-regular fa-heart"></i>
+              <Link className="user_wishlist">
+                <Link className="wishlist_icon" to={"/wishlist"}>
+                  <i className="fa-regular fa-heart"></i>
+                </Link>
+                <div className="wishlist_panel">
+                  <div className="wrapper">
+                    <p className="text_loginFirst">
+                      You havent saved any items to your wishlist yet. Start
+                      shopping and add your favorite items to your wishlist.
+                    </p>
+                    <p className="text_loginFirst gray">
+                      Become a G-Star RAW member today or log in to save the
+                      item(s) so they wont be lost.
+                    </p>
+                    <div className="btn_large full_Width">
+                      <p>Login</p>
+                    </div>
+                    <div className="btn_large full_Width gray">
+                      <p>Create Account</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
             <div className="cart">
-              <i className="fa-solid fa-cart-shopping"></i>
+              <Link className="shopping-cart">
+                <Link className="cart_icon" to={"/checkout/shopping-bag"}>
+                  <i className="fa-solid fa-cart-shopping"></i>
+                </Link>
+
+                <div className="shopping_cart_panel">
+                  <div className="wrapper">
+                    <p className="cart_empty">your shopping bag is empty</p>
+                    <div className="btn_large">
+                      <p>containue shopping</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

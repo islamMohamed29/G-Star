@@ -7,6 +7,7 @@ export default [
     alt: "Distressed Logo T-Shirt",
     price: 20,
     sizes: ["31", "28", "29", "38"],
+    lengths: ["26", "28", "30", "32", "34", "36", "38"],
     brand: "Outfits",
     category: "Jeans",
     gender: "men",
@@ -47,6 +48,7 @@ export default [
     alt: "Distressed Logo T-Shirt",
     price: 200,
     sizes: ["44", "28", "29", "38"],
+    lengths: ["26", "28", "30"],
     brand: "Outfits",
     category: "Jeans",
     images: {

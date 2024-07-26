@@ -1016,3 +1016,42 @@ main.customProduct
   align-items: center;
   border: 1px solid #000;
 }
+
+/* GLobals  */
+
+input.filterCheckBox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 1px solid #090909;
+  cursor: pointer;
+}
+
+input.filterCheckBox:checked {
+  background-color: #090909;
+}
+input.filterCheckBox:disabled {
+  background-color: #777;
+}
+input.filterCheckBox:disabled + label {
+  color: #777;
+  text-decoration: line-through;
+}
+ul.parentFilterPanel.show {
+  padding: 20px;
+  display: flex;
+  max-height: 400px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background: #fff;
+  column-gap: 50px;
+  row-gap: 20px;
+}
+ul.parentFilterPanel li {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}

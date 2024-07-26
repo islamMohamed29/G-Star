@@ -3,6 +3,7 @@ import PriceRangeFilter from "./PriceRangeFilter";
 import ColorFilter from "./ColorFilter";
 import GenderFilter from "./GenderFilter";
 import SizeFilter from "./SizeFilter";
+import LengthFilter from "./LengthFilter";
 
 // eslint-disable-next-line no-unused-vars
 const FilterPanel = ({ filters, setFilters }) => {
@@ -12,6 +13,7 @@ const FilterPanel = ({ filters, setFilters }) => {
       <ColorFilter setFilters={setFilters} />
       <GenderFilter setFilters={setFilters} />
       <SizeFilter setFilters={setFilters} />
+      <LengthFilter setFilters={setFilters} />
     </>
   );
 };

@@ -8,7 +8,7 @@ import FilterPanel from "./FilterPanel";
 const initialFilters = {
   priceRange: [0, Infinity],
   colors: [],
-  length: [],
+  lengths: [],
   sizes: [],
   fit: [],
   category: [],
@@ -35,7 +35,7 @@ export default function Shop() {
 
     for (let key of [
       "colors",
-      "length",
+      "lengths",
       "sizes",
       "fit",
       "category",
@@ -46,10 +46,17 @@ export default function Shop() {
           filtered = filtered.filter((product) =>
             filters[key].some((color) => product.colors?.includes(color))
           );
-        } else if (key === "sizes") {
-          filtered = filtered.filter((product) =>
-            filters[key].some((size) => product.sizes?.includes(size))
-          );
+        } else if (key === "sizes" || key === "lengths") {
+          if (key === "sizes") {
+            filtered = filtered.filter((product) =>
+              filters[key].some((size) => product.sizes?.includes(size))
+            );
+          }
+          if (key === "lengths") {
+            filtered = filtered.filter((product) =>
+              filters[key].some((length) => product.lengths?.includes(length))
+            );
+          }
         } else {
           filtered = filtered.filter((product) =>
             filters[key].includes(product[key])
@@ -351,75 +358,6 @@ export default function Shop() {
                       id="boyfriendCheckBox"
                     />
                     <label htmlFor="boyfriendCheckBox">Boyfriend</label>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="by-length">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Length
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length26CheckBox"
-                      id="length26CheckBox"
-                    />
-                    <label htmlFor="length26CheckBox">26</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length28CheckBox"
-                      id="length28CheckBox"
-                    />
-                    <label htmlFor="length28CheckBox">28</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length30CheckBox"
-                      id="length30CheckBox"
-                    />
-                    <label htmlFor="length30CheckBox">30</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length32CheckBox"
-                      id="length32CheckBox"
-                    />
-                    <label htmlFor="length32CheckBox">32</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length34CheckBox"
-                      id="length34CheckBox"
-                    />
-                    <label htmlFor="length34CheckBox">34</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length36CheckBox"
-                      id="length36CheckBox"
-                    />
-                    <label htmlFor="length36CheckBox">36</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="length38CheckBox"
-                      id="length38CheckBox"
-                    />
-                    <label htmlFor="length38CheckBox">38</label>
                   </li>
                 </ul>
               </div>
