@@ -372,26 +372,27 @@ export default function Shop() {
                     <>
                       <div className="col-md-3">
                         <div key={index} className="product">
-                        <Link to={`/shop/product/312312312`}>
-                        <img
-                            src={`/products/product-1/${product.mainImage}`}
-                            alt={`${product.name}`}
-                            className="main-image"
-                          />
-                          <img
-                            src={`/products/product-1/${product.hoverImage}`}
-                            alt={`${product.name}`}
-                            className="hover-image"
-                          />
-                          <img
-                            src={`/products/product-1/${
-                              currentColor
-                                ? product.images[currentColor]
-                                : product.hoverImage
-                            }`}
-                            className="hover-image"
-                            // alt  // product.name or currnetColor alt name
-                          /></Link>
+                          <Link to={`/shop/product/${product.id}`}>
+                            <img
+                              src={`/products/product-1/${product.mainImage}`}
+                              alt={`${product.name}`}
+                              className="main-image"
+                            />
+                            <img
+                              src={`/products/product-1/${product.hoverImage}`}
+                              alt={`${product.name}`}
+                              className="hover-image"
+                            />
+                            <img
+                              src={`/products/product-1/${
+                                currentColor
+                                  ? product.images[currentColor]
+                                  : product.hoverImage
+                              }`}
+                              className="hover-image"
+                              // alt  // product.name or currnetColor alt name
+                            />
+                          </Link>
                           <div className="product-status"></div>
                           <div className="about-product">
                             <div className="status">NEW</div>

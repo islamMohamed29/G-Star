@@ -1,7 +1,7 @@
 export default [
   {
     id: 312312312,
-    name: "men",
+    name: "menzzzzzzz",
     mainImage: "front-1.jpg",
     hoverImage: "back-1.jpg",
     alt: "Distressed Logo T-Shirt",
@@ -19,7 +19,11 @@ export default [
     },
     gallery: [
       {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
+        large: "/pages/shop/products/image (1).avif",
+        thumbnail: "/pages/shop/products/image a.avif",
+      },
+      {
+        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-1.jpg",
         thumbnail:
           "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
       },

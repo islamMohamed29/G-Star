@@ -3,6 +3,9 @@ body {
   margin: 0;
   padding: 0;
 }
+main.product_details {
+  padding: 60px 0;
+}
 ul,
 h1 {
   margin: 0;
