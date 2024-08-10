@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProductGallery.css";
 
-const ProductGallery = ({ images }) => {
-  const [selectedImage, setSelectedImage] = useState(images[0].large);
+const ProductGallery = ({ images, selectedImage  }) => {
+  const [currentImage, setCurrentImage] = useState(selectedImage);
   const [isZoomed, setIsZoomed] = useState(false);
 
   const handleMouseMove = (e) => {
@@ -16,6 +16,10 @@ const ProductGallery = ({ images }) => {
     e.target.style.transformOrigin = `${x}% ${y}%`;
   };
 
+  useEffect(() => {
+    setCurrentImage(selectedImage);
+  }, [selectedImage]);
+
   const handleClick = () => {
     setIsZoomed(!isZoomed);
   };
@@ -24,7 +28,7 @@ const ProductGallery = ({ images }) => {
     <div className="product-gallery">
       <div className="main-image-container">
         <img
-          src={selectedImage}
+          src={currentImage}
           alt="Product"
           className={`main-image ${isZoomed ? "zoomed" : ""}`}
           onMouseMove={handleMouseMove}
@@ -37,9 +41,9 @@ const ProductGallery = ({ images }) => {
             key={index}
             src={image.thumbnail}
             alt=""
-            onClick={() => setSelectedImage(image.large)}
+            onClick={() => setCurrentImage(image.large)}
             className={`thumbnail ${
-              selectedImage === image.large ? "selected" : ""
+              currentImage  === image.large ? "selected" : ""
             }`}
           />
         ))}

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 body {
   box-sizing: border-box;
   margin: 0;
@@ -5,6 +6,9 @@ body {
 }
 main.product_details {
   padding: 60px 0;
+}
+ul {
+  list-style: none;
 }
 ul,
 h1 {
@@ -1057,4 +1061,41 @@ ul.parentFilterPanel li {
   display: flex;
   column-gap: 10px;
   align-items: center;
+}
+
+
+.product_details .name-product {
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 26px;
+  letter-spacing: -1px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+.product_details .price-product {
+  font-weight: 900;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+}
+
+.product_details .price-product .vat {
+  font-size: 14px;
+  color: #4b555e;
+  font-weight: 400;
+}
+.product_details .colors-panel .panel ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.product_details .colors-panel .panel ul li {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.product_details .colors-panel .panel ul li img {
+  width: 100%;
+
 }

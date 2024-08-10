@@ -15,20 +15,25 @@
 }
 
 .main-image {
-  width: 100%;
+  /* width: 100%;
   height: 100%;
-
-  object-position: top; /* تضع الصورة في منتصف الحاوية */
-
+  object-position: top; */
+   /* تضع الصورة في منتصف الحاوية */
   /* width: calc(130.5%); */
-  object-fit: cover;
+  /* object-fit: cover;
   transition: transform 0.1s;
-  cursor: zoom-in;
+  cursor: zoom-in; */
+
+  object-fit: cover;
+  object-position: 39% 50%;
+  width: calc(130.5%);
+  aspect-ratio: 1922 / 675;
 }
 
 .main-image.zoomed {
   transform: scale(4);
   cursor: zoom-out;
+  position: fixed;
 }
 
 .thumbnails {

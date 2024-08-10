@@ -1,7 +1,7 @@
 export default [
   {
     id: 312312312,
-    name: "menzzzzzzz",
+    name: "Nifous T-Shirt",
     mainImage: "front-1.jpg",
     hoverImage: "back-1.jpg",
     alt: "Distressed Logo T-Shirt",
@@ -17,36 +17,11 @@ export default [
       black: "color-3.jpg",
       gray: "color-4.jpg",
     },
-    gallery: [
-      {
-        large: "/pages/shop/products/image (1).avif",
-        thumbnail: "/pages/shop/products/image a.avif",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-1.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-      },
-    ],
+   
   },
   {
     id: 2,
-    name: "Distressed Logo T-Shirt",
+    name: "xzxzxzxzxzxz Logo T-Shirt",
     mainImage: "front-1.jpg",
     hoverImage: "back-1.jpg",
     alt: "Distressed Logo T-Shirt",
@@ -61,28 +36,34 @@ export default [
       black: "color-3.jpg",
       gray: "color-4.jpg",
     },
-    gallery: [
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-3.jpg",
-      },
-      {
-        large: "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-        thumbnail:
-          "/pages/shop/products/g-star-raw-3301-slim-jeans-black-5.jpg",
-      },
-    ],
+    gallery : {
+      "dark black garment dyed": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-black.jpg", "large": "/g-star-raw-nifous-t-shirt-black11.avif" },
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-blac22222k.avif", "large": "/86aog-genjd.jpg" }
+      ],
+      "shadow olive": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-green.jpg", "large": "/g-star-raw-nifous-t-shirt-green22.avif" },
+      ],
+      "rusty red gd": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-red (1).jpg", "large": "/g-star-raw-nifous-t-shirt-red33.avif" },
+      
+      ],
+      "white": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-white.jpg", "large": "/g-star-raw-nifous-t-shirt-white44.avif" },
+    
+      ],
+      "imperial blue": [
+        { "thumbnail":  "/g-star-raw-nifous-t-shirt-dark-blue.jpg", "large": "/g-star-raw-nifous-t-shirt-dark-blue55.avif" },
+
+      ]
+    },
+  colorPanel: [
+      { "color": "dark black garment dyed", "image": "/g-star-raw-nifous-t-shirt-black.jpg" },
+      { "color": "shadow olive", "image": "/g-star-raw-nifous-t-shirt-green.jpg" },
+      { "color": "rusty red gd", "image": "/g-star-raw-nifous-t-shirt-red.jpg" },
+      { "color": "white", "image": "/g-star-raw-nifous-t-shirt-white.jpg" },
+      { "color": "imperial blue", "image": "/g-star-raw-nifous-t-shirt-dark-blue.jpg" }
+    ]
   },
   {
     id: 3,
