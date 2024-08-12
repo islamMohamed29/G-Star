@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 body {
   box-sizing: border-box;
   margin: 0;
@@ -16,11 +16,11 @@ ul {
 }
 .my-6 {
   margin-top: 6px;
-  margin-bottom:6px ;
+  margin-bottom: 6px;
 }
 .my-20 {
   margin-top: 20px;
-  margin-bottom:20px ;
+  margin-bottom: 20px;
 }
 .special-gray-title-14,
 .special-gray-title-13 {
@@ -1087,7 +1087,6 @@ ul.parentFilterPanel li {
   align-items: center;
 }
 
-
 .product_details .name-product {
   font-weight: bolder;
   text-transform: uppercase;
@@ -1107,8 +1106,8 @@ ul.parentFilterPanel li {
   color: #4b555e;
   font-weight: 400;
 }
-.product_details .colors-panel .panel ul ,
-.product_details .sizing-area .panel ul{
+.product_details .colors-panel .panel ul,
+.product_details .sizing-area .panel ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1120,7 +1119,6 @@ ul.parentFilterPanel li {
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-
 }
 .product_details .colors-panel .panel ul li img {
   width: 100%;
@@ -1146,12 +1144,10 @@ ul.parentFilterPanel li {
   cursor: pointer;
 }
 
-
 .product_details .sizing-area .panel ul li.selected-size {
   border-bottom-width: 3px;
   font-weight: bold;
 }
-
 
 .product_details .is-available p {
   color: #12a100;
@@ -1190,6 +1186,11 @@ ul.parentFilterPanel li {
 .product_details .buttons-area .add_wishlist {
   width: 40px;
   height: 40px;
-  border: 1px solid #000; 
+  border: 1px solid #000;
   /* when i add to wishlist heart icon will be solid black */
+}
+.product_details .accordion-panel h2 button {
+  font-weight: bolder;
+  font-size: 15px;
+  padding: 15px 0;
 }
