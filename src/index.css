@@ -3,12 +3,36 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 main.product_details {
   padding: 60px 0;
 }
 ul {
   list-style: none;
+}
+.m-0 {
+  margin: 0;
+}
+.my-6 {
+  margin-top: 6px;
+  margin-bottom:6px ;
+}
+.my-20 {
+  margin-top: 20px;
+  margin-bottom:20px ;
+}
+.special-gray-title-14,
+.special-gray-title-13 {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 14px;
+}
+.special-gray-title-14 {
+  font-size: 14px;
+}
+.special-gray-title-13 {
+  font-size: 13px;
 }
 ul,
 h1 {
@@ -1083,7 +1107,8 @@ ul.parentFilterPanel li {
   color: #4b555e;
   font-weight: 400;
 }
-.product_details .colors-panel .panel ul {
+.product_details .colors-panel .panel ul ,
+.product_details .sizing-area .panel ul{
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -1094,8 +1119,77 @@ ul.parentFilterPanel li {
   height: 64px;
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
+
 }
 .product_details .colors-panel .panel ul li img {
   width: 100%;
+}
 
+.product_details .colors-panel .panel ul li.selected-color {
+  border: 1px solid #000;
+}
+
+.product_details .colors-panel .color-name {
+  color: #000;
+  font-weight: 400;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.product_details .sizing-area .panel ul li {
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+.product_details .sizing-area .panel ul li.selected-size {
+  border-bottom-width: 3px;
+  font-weight: bold;
+}
+
+
+.product_details .is-available p {
+  color: #12a100;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 15px 0 5px;
+}
+.product_details .buttons-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.product_details .buttons-area button {
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+.product_details .buttons-area .add_cart {
+  flex: 1;
+  border: 2px solid #00385f;
+  background-color: #00385f;
+  text-align: center;
+  font-weight: 700;
+  min-width: 133px;
+  padding: 0px 20px;
+  height: 40px;
+  color: #fff;
+  font-size: 14px;
+}
+.product_details .buttons-area .add_cart:hover {
+  background-color: transparent;
+  color: #00385f;
+}
+
+.product_details .buttons-area .add_wishlist {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000; 
+  /* when i add to wishlist heart icon will be solid black */
 }

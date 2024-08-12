@@ -1,27 +1,53 @@
 export default [
   {
-    id: 312312312,
-    name: "Nifous T-Shirt",
+    id: 1,
+    name: "T-Shirt",
     mainImage: "front-1.jpg",
     hoverImage: "back-1.jpg",
     alt: "Distressed Logo T-Shirt",
-    price: 20,
-    sizes: ["31", "28", "29", "38"],
-    lengths: ["26", "28", "30", "32", "34", "36", "38"],
+    price: 200,
+    sizes: ["44", "28", "29", "38"],
+    lengths: ["26", "28", "30"],
     brand: "Outfits",
     category: "Jeans",
-    gender: "men",
     images: {
       beg: "color-1.jpg",
       rose: "color-2.jpg",
       black: "color-3.jpg",
       gray: "color-4.jpg",
     },
-   
+    gallery : {
+      "dark black garment dyed": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-black.jpg", "large": "/g-star-raw-nifous-t-shirt-black11.avif" },
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-blac22222k.avif", "large": "/86aog-genjd.jpg" }
+      ],
+      "shadow olive": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-green.jpg", "large": "/g-star-raw-nifous-t-shirt-green22.avif" },
+      ],
+      "rusty red gd": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-red (1).jpg", "large": "/g-star-raw-nifous-t-shirt-red33.avif" },
+      
+      ],
+      "white": [
+        { "thumbnail": "/g-star-raw-nifous-t-shirt-white.jpg", "large": "/g-star-raw-nifous-t-shirt-white44.avif" },
+    
+      ],
+      "imperial blue": [
+        { "thumbnail":  "/g-star-raw-nifous-t-shirt-dark-blue.jpg", "large": "/g-star-raw-nifous-t-shirt-dark-blue55.avif" },
+
+      ]
+    },
+  colorPanel: [
+      { "color": "dark black garment dyed", "image": "/g-star-raw-nifous-t-shirt-black.jpg" },
+      { "color": "shadow olive", "image": "/g-star-raw-nifous-t-shirt-green.jpg" },
+      { "color": "rusty red gd", "image": "/g-star-raw-nifous-t-shirt-red.jpg" },
+      { "color": "white", "image": "/g-star-raw-nifous-t-shirt-white.jpg" },
+      { "color": "imperial blue", "image": "/g-star-raw-nifous-t-shirt-dark-blue.jpg" }
+    ]
   },
   {
     id: 2,
-    name: "xzxzxzxzxzxz Logo T-Shirt",
+    name: "Nifous T-Shirt",
     mainImage: "front-1.jpg",
     hoverImage: "back-1.jpg",
     alt: "Distressed Logo T-Shirt",
