@@ -1,7 +1,10 @@
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { signUp } from "../../redux/slices/user-slice";
+import { useDispatch } from "react-redux";
 
 export default function Register() {
+  let dispatch = useDispatch();
   const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email("* In-Valid Email")
@@ -13,22 +16,25 @@ export default function Register() {
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/[0-9]/, "Password must contain at least one number")
       .matches(/^\S*$/, "Password must not contain whitespace"),
-    username: Yup.string().required("* Username Is Required"),
+    name: Yup.string().required("* Username Is Required"),
   });
+  // https://e-ccomerce.vercel.app/api/v1/auth/signup
   const handleSignUp = async (values) => {
-    const { email, password, username } = values;
+    const { email, password, name } = values;
     let userData = {
       email,
       password,
-      username,
+      cPassword: password,
+      phone: "123456456789432",
+      name,
     };
-    console.log(userData);
+    dispatch(signUp(userData));
   };
   return (
     <div className="form-parent">
       <main className="form-auth">
         <Formik
-          initialValues={{ username: "", email: "", password: "" }}
+          initialValues={{ name: "", email: "", password: "" }}
           validationSchema={SignupSchema}
           onSubmit={handleSignUp}
         >
@@ -42,16 +48,16 @@ export default function Register() {
               <div className="form-floating">
                 <Field
                   type="text"
-                  name="username"
-                  id="username"
+                  name="name"
+                  id="name"
                   placeholder="Username"
                   className={`form-control ${
-                    touched.username && errors.username ? "is-invalid" : ""
+                    touched.name && errors.name ? "is-invalid" : ""
                   }`}
                 />
-                <label htmlFor="username">Username</label>
+                <label htmlFor="name">Username</label>
                 <ErrorMessage
-                  name="username"
+                  name="name"
                   component="div"
                   className="invalid-feedback"
                 />

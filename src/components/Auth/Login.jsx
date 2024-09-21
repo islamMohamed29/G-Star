@@ -1,6 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { signIn } from "../../redux/slices/user-slice";
 export default function Login() {
+  let dispatch = useDispatch();
   const SigninSchema = Yup.object().shape({
     email: Yup.string()
       .email("* In-Valid Email")
@@ -14,7 +17,7 @@ export default function Login() {
       email,
       password,
     };
-    console.log(userData);
+    dispatch(signIn(userData));
   };
   return (
     <div className="form-parent">

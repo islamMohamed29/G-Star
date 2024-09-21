@@ -35,7 +35,7 @@ export default function Navbar() {
             <div className="links">
               <ul>
                 <li>
-                  <a href={"/shop"}>{Resources["shop"][currentLanguage]}</a>
+                  <Link to={"/shop"}>{Resources["shop"][currentLanguage]}</Link>
                 </li>
               </ul>
             </div>

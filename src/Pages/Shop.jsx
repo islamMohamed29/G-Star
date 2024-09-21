@@ -4,6 +4,7 @@ import Resources from "../locales/Resources.json";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
+import Api from "../dependencies/instanceAxios";
 
 const initialFilters = {
   priceRange: [0, Infinity],
@@ -26,6 +27,14 @@ export default function Shop() {
   };
 
   const [filters, setFilters] = useState(initialFilters);
+  const getAllProduct = async () => {
+    let product = await Api.get("products");
+    console.log("product", product);
+  };
+  useEffect(() => {
+    getAllProduct();
+  }, []);
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   useEffect(() => {
     // Apply filters whenever filters state changes

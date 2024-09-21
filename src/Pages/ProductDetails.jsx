@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import products from "../json/products";
 import { useSelector } from "react-redux";
 import ProductGallery from "./ProductGallery.jsx";
+import SvgPant from "../components/Shop/SvgPant.jsx";
 
 export default function ProductDetails() {
+  const detailsRef = useRef(null);
+
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -16,6 +19,16 @@ export default function ProductDetails() {
   let currentLanguage = localStorage.getItem("language")
     ? localStorage.getItem("language")
     : "en";
+
+  useEffect(() => {
+    const foundProduct = products.find((product) => product.id === Number(id));
+    if (foundProduct) {
+      setProduct(foundProduct);
+      const initialColor = foundProduct.colorPanel[0]?.color;
+      setGalleryImages(foundProduct.gallery[initialColor] || []);
+      setSelectedImage(galleryImages[0]?.large || "");
+    }
+  }, [id]);
 
   useEffect(() => {
     const foundProduct = products.find((product) => product.id === Number(id));
@@ -69,7 +82,7 @@ export default function ProductDetails() {
         <div className="container-fluid">
           {product ? (
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-8 p-0">
                 <div className="preview_area">
                   <ProductGallery
                     images={galleryImages}
@@ -78,7 +91,7 @@ export default function ProductDetails() {
                 </div>
               </div>
               <div className="col-md-4">
-                <div className="details_area">
+                <div className="details_area" ref={detailsRef}>
                   <div className="name-product">{product.name}</div>
                   <div className="price-product">
                     €{product.price} <span className="vat">including VAT</span>
@@ -131,7 +144,27 @@ export default function ProductDetails() {
                   </div>
                   <div className="buttons-area">
                     <button className="add_cart">add to bag</button>
-                    <button className="add_wishlist">w</button>
+                    <button className="add_wishlist">
+                      <i className="fa-regular fa-heart"></i>
+                    </button>
+                  </div>
+
+                  <div className="location_ups">
+                    <div className="location">
+                      <div className="icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <p>Find in local store</p>
+                    </div>
+                    <div className="ups">
+                      <div className="wrap">
+                        <div className="icon">
+                          <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <p>UPS</p>
+                      </div>
+                      <p className="cost_shipping">Free</p>
+                    </div>
                   </div>
 
                   <div className="accordion-panel">
@@ -139,6 +172,129 @@ export default function ProductDetails() {
                       className="accordion accordion-flush"
                       id="accordionFlushProductDetails"
                     >
+                      {/* start  */}
+                      <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-d-staq">
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseDstaq"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseDstaq"
+                          >
+                            D-staq
+                          </button>
+                        </h2>
+                        <div
+                          id="flush-collapseDstaq"
+                          className="accordion-collapse collapse"
+                          aria-labelledby="flush-d-staq"
+                          data-bs-parent="#accordionFlushProductDetails"
+                        >
+                          <div className="accordion-body">
+                            <SvgPant />
+                            <p className="text-accordion">
+                              The D-Staq pant is a simplified version of the
+                              Staq pant first launched in May 2016. It is a
+                              hybrid design combining traditional denim and
+                              chino details based on research conducted in the
+                              G-Star Raw archive.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-material">
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseMaterial"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseMaterial"
+                          >
+                            Material
+                          </button>
+                        </h2>
+                        <div
+                          id="flush-collapseMaterial"
+                          className="accordion-collapse collapse"
+                          aria-labelledby="flush-material"
+                          data-bs-parent="#accordionFlushProductDetails"
+                        >
+                          <div className="accordion-body">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Repudiandae blanditiis neque doloremque
+                            maiores dolorum fugit veniam, quibusdam, excepturi,
+                            nam qui distinctio aliquid. Temporibus labore
+                            quaerat numquam, suscipit deleniti quia laudantium.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-features">
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFeatures"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseFeatures"
+                          >
+                            Features
+                          </button>
+                        </h2>
+                        <div
+                          id="flush-collapseFeatures"
+                          className="accordion-collapse collapse"
+                          aria-labelledby="flush-features"
+                          data-bs-parent="#accordionFlushProductDetails"
+                        >
+                          <div className="accordion-body">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Repudiandae blanditiis neque doloremque
+                            maiores dolorum fugit veniam, quibusdam, excepturi,
+                            nam qui distinctio aliquid. Temporibus labore
+                            quaerat numquam, suscipit deleniti quia laudantium.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="accordion-item">
+                        <h2
+                          className="accordion-header"
+                          id="flush-responsibleMaterialsRanking"
+                        >
+                          <button
+                            className="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseResponsibleMaterialsRanking"
+                            aria-expanded="false"
+                            aria-controls="flush-collapseResponsibleMaterialsRanking"
+                          >
+                            Responsible Materials Ranking
+                          </button>
+                        </h2>
+                        <div
+                          id="flush-collapseResponsibleMaterialsRanking"
+                          className="accordion-collapse collapse"
+                          aria-labelledby="flush-responsibleMaterialsRanking"
+                          data-bs-parent="#accordionFlushProductDetails"
+                        >
+                          <div className="accordion-body">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Repudiandae blanditiis neque doloremque
+                            maiores dolorum fugit veniam, quibusdam, excepturi,
+                            nam qui distinctio aliquid. Temporibus labore
+                            quaerat numquam, suscipit deleniti quia laudantium.
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* End   */}
                       <div className="accordion-item">
                         <h2 className="accordion-header" id="flush-sizeAndFit">
                           <button
@@ -159,10 +315,11 @@ export default function ProductDetails() {
                           data-bs-parent="#accordionFlushProductDetails"
                         >
                           <div className="accordion-body">
-                            Placeholder content for this accordion, which is
-                            intended to demonstrate the{" "}
-                            <code>.accordion-flush</code> class. This is the
-                            first accordion body.
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Repudiandae blanditiis neque doloremque
+                            maiores dolorum fugit veniam, quibusdam, excepturi,
+                            nam qui distinctio aliquid. Temporibus labore
+                            quaerat numquam, suscipit deleniti quia laudantium.
                           </div>
                         </div>
                       </div>
@@ -190,18 +347,16 @@ export default function ProductDetails() {
                           data-bs-parent="#accordionFlushProductDetails"
                         >
                           <div className="accordion-body">
-                            Placeholder content for this accordion, which is
-                            intended to demonstrate the{" "}
-                            <code>.accordion-flush</code> class. This is the
-                            first accordion body.
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Similique eaque suscipit facere velit modi.
+                            Praesentium quidem corrupti, neque natus, aliquid
+                            pariatur atque, sunt accusantium sequi molestias
+                            libero placeat mollitia alias.
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="brand-product">{product.brand}</div>
-                  <div className="category-product">{product.category}</div>
-                  <div className="gender-product">{product.gender}</div>
                 </div>
               </div>
             </div>
