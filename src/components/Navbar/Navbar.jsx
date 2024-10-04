@@ -1,15 +1,18 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { navOpen } from "../../redux/slices/layout-slice";
 import Resources from "../../locales/Resources.json";
 import { Link } from "react-router-dom";
+import { removeItemCart } from "../../redux/slices/cart-slice";
 export default function Navbar() {
+  const { currentUser } = useSelector((state) => state.user);
   const [isClicked, setIsClicked] = useState(false);
   const dispatch = useDispatch();
   const handleClick = () => {
     setIsClicked(!isClicked);
     dispatch(navOpen(!isClicked));
   };
+  let cartData = useSelector((state) => state.cart.cartItems);
 
   const handleLang = (e) => {
     localStorage.setItem("language", e.target.value);
@@ -18,6 +21,31 @@ export default function Navbar() {
   let currentLanguage = localStorage.getItem("language")
     ? localStorage.getItem("language")
     : "en";
+  // let cartData = localStorage.getItem("cartData")
+  //   ? JSON.parse(localStorage.getItem("cartData"))
+  //   : [];
+  // const [shippingCost, setShippingCost] = useState(0);
+  const [taxCost, setTaxCost] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  // Function to calculate all costs
+  const calculateCosts = () => {
+    const subTotal = cartData.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    const taxCost = subTotal * 0.15;
+    const totalAmount = subTotal + taxCost;
+
+    setSubTotal(subTotal.toFixed(2));
+    setTaxCost(taxCost.toFixed(2));
+    setTotalAmount(totalAmount.toFixed(2));
+  };
+
+  useEffect(() => {
+    calculateCosts();
+  }, [cartData]);
   return (
     <>
       <nav>
@@ -86,12 +114,19 @@ export default function Navbar() {
                       Become a G-Star RAW member today or log in to save the
                       item(s) so they wont be lost.
                     </p>
-                    <div className="btn_large full_Width">
-                      <p>Login</p>
-                    </div>
-                    <div className="btn_large full_Width gray">
-                      <p>Create Account</p>
-                    </div>
+                    {!currentUser && (
+                      <Fragment>
+                        <Link to={"login"} className="btn_large full_Width">
+                          <p>Login</p>
+                        </Link>
+                        <Link
+                          to={"register"}
+                          className="btn_large full_Width gray"
+                        >
+                          <p>Create Account</p>
+                        </Link>
+                      </Fragment>
+                    )}
                   </div>
                 </div>
               </Link>
@@ -104,7 +139,86 @@ export default function Navbar() {
 
                 <div className="shopping_cart_panel">
                   <div className="wrapper">
-                    <p className="cart_empty">your shopping bag is empty</p>
+                    {cartData.length > 0 && (
+                      <>
+                        <div className="header">
+                          Items not reserved
+                          <span>- checkout now to make them yours</span>
+                        </div>
+                        <ul className="cart_product">
+                          {cartData?.map((productCart) => (
+                            <li className="product">
+                              <span
+                                onClick={() =>
+                                  dispatch(
+                                    removeItemCart({
+                                      id: productCart.id,
+                                      size: productCart.selectedSize,
+                                    })
+                                  )
+                                }
+                                className="remove_product"
+                              >
+                                <i class="fa-solid fa-xmark"></i>
+                              </span>
+                              <div className="image">
+                                <img
+                                  src="/products/product-1/back-1.jpg"
+                                  alt=""
+                                />
+                              </div>
+                              <div className="details">
+                                <div className="head">
+                                  <p className="product_name">
+                                    {productCart.name}
+                                  </p>
+                                  <p className="product_price">
+                                    {productCart.price}
+                                  </p>
+                                </div>
+                                <div className="bottom">
+                                  {/* category / color name / W34 L32 / 1 */}
+                                  <p>
+                                    {productCart.category} /
+                                    {productCart.colorPanel[0].color} / W
+                                    {productCart.sizes[0]} L
+                                    {productCart.lengths[0]} /{" "}
+                                    {productCart.quantity}{" "}
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                          <div className="line_section"></div>
+                          <div className="price_details">
+                            <div className="sub_details">
+                              <ul>
+                                <li>
+                                  <p className="name">Subtotal</p>
+                                  <p className="data">{subTotal}</p>
+                                </li>
+                                <li>
+                                  <p className="name">Shipping</p>
+                                  <p className="data">Free</p>
+                                </li>
+                                <li>
+                                  <p className="name">Tax</p>
+                                  <p className="data">{taxCost}</p>
+                                </li>
+                                <li className="total">
+                                  <div className="name">Total</div>
+                                  <div className="data">{totalAmount}</div>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </ul>
+                      </>
+                    )}
+
+                    {!cartData.length > 0 && (
+                      <p className="cart_empty">your shopping bag is empty</p>
+                    )}
                     <div className="btn_large">
                       <p>containue shopping</p>
                     </div>

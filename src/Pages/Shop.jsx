@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import Api from "../dependencies/instanceAxios";
+import Product from "../components/Shop/Product";
 
 const initialFilters = {
   priceRange: [0, Infinity],
@@ -124,8 +125,6 @@ export default function Shop() {
             </div>
           </div>
         </header>
-
-        {/* <ProductList products={filteredProducts} /> */}
 
         <section className="products_shop_all">
           <div className="head-section">
@@ -376,96 +375,16 @@ export default function Shop() {
           <div className="products">
             <div className="container">
               <div className="row">
-                {filteredProducts.map((product, index) => {
-                  return (
-                    <>
-                      <div className="col-md-3">
-                        <div key={index} className="product">
-                          <Link to={`/shop/product/${product.id}`}>
-                            <img
-                              src={`/products/product-1/${product.mainImage}`}
-                              alt={`${product.name}`}
-                              className="main-image"
-                            />
-                            <img
-                              src={`/products/product-1/${product.hoverImage}`}
-                              alt={`${product.name}`}
-                              className="hover-image"
-                            />
-                            <img
-                              src={`/products/product-1/${
-                                currentColor
-                                  ? product.images[currentColor]
-                                  : product.hoverImage
-                              }`}
-                              className="hover-image"
-                              // alt  // product.name or currnetColor alt name
-                            />
-                          </Link>
-                          <div className="product-status"></div>
-                          <div className="about-product">
-                            <div className="status">NEW</div>
-                            <div className="info">
-                              <div className="top-info">
-                                <div className="name">{product.name}</div>
-                                <div className="price">{product.price} EGP</div>
-                              </div>
-                              <div className="colors">
-                                <div className="list-colors">
-                                  {Object.keys(product.images).map(
-                                    (color, index) => (
-                                      <li
-                                        key={index}
-                                        onMouseEnter={() =>
-                                          handleColorHover(color)
-                                        }
-                                        onMouseLeave={() =>
-                                          handleColorHover("")
-                                        }
-                                      >
-                                        <Link
-                                          href="#"
-                                          className={`jeans_${color}`}
-                                        ></Link>
-                                      </li>
-                                    )
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </>
-                  );
-                })}
+                {filteredProducts.map((product, index) => (
+                  <Product
+                    key={index}
+                    product={product}
+                    currentColor={currentColor}
+                    handleColorHover={handleColorHover}
+                  />
+                ))}
               </div>
             </div>
-            {/* {products.map((product) => {
-              return (
-                <div className="product"></div>
-                // <div className="product">
-                //   <img
-                //     src={`/products/2448586_7_800x.webp`}
-                //     alt=""
-                //     className="main-image"
-                //   />
-                //   <img
-                //     src={`/products/2448586_7_800x.webp`}
-                //     alt=""
-                //     className="hover-image"
-                //   />
-                //   <div className="about-product">
-                //     <div className="status">NEW</div>
-                //     <div className="info">
-                //       <div className="name">{product.name}</div>
-                //       <div className="price">{product.price} EGP</div>
-                //     </div>
-                //   </div>
-                //   <div className="colors"></div>
-                // </div>
-              );
-            })} */}
           </div>
         </section>
       </div>

@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signUp } from "../../redux/slices/user-slice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   let dispatch = useDispatch();
@@ -105,9 +106,9 @@ export default function Register() {
               </button>
               <div className="already_have mt-2">
                 Already have an account
-                <a href="/login" className="ms-1">
+                <Link to="/login" className="ms-1">
                   Login
-                </a>
+                </Link>
               </div>
               <p className="mt-5 mb-3 text-muted">&copy; 2023–2024</p>
             </Form>

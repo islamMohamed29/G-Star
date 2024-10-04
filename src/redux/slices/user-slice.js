@@ -5,7 +5,7 @@ import { notifySuccess } from "../../dependencies/Notification";
 import { jwtDecode } from "jwt-decode";
 
 const initialState = {
-  user: null,
+  currentUser: null,
 };
 
 export const signUp = createAsyncThunk(
@@ -39,15 +39,15 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.user = action.payload;
+      state.currentUser = action.payload;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
       const token = action.payload;
       localStorage.setItem("token", token);
       const decodedToken = jwtDecode(token);
-      state.user = decodedToken;
+      state.currentUser = decodedToken;
       console.log(decodedToken, "decodedToken");
-      console.log(state.user, "user in state redux");
+      console.log(state.currentUser, "currentUser in state redux");
     });
   },
 });

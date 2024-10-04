@@ -22,7 +22,7 @@ function App() {
         {
           path: "login",
           element: (
-            <ProtectedRoute redirectTo="/">
+            <ProtectedRoute isCanGo={true} redirectTo="/">
               <Login />
             </ProtectedRoute>
           ),
@@ -30,7 +30,7 @@ function App() {
         {
           path: "register",
           element: (
-            <ProtectedRoute redirectTo="/">
+            <ProtectedRoute isCanGo={true} redirectTo="/">
               <Register />
             </ProtectedRoute>
           ),

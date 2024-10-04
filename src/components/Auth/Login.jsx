@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { signIn } from "../../redux/slices/user-slice";
+import { Link } from "react-router-dom";
 export default function Login() {
   let dispatch = useDispatch();
   const SigninSchema = Yup.object().shape({
@@ -76,9 +77,9 @@ export default function Login() {
                   <p className="obligated">
                     Registration is not <br /> obligated.
                   </p>
-                  <a className="btn-register" href="/register">
+                  <Link className="btn-register" to="/register">
                     create an account
-                  </a>
+                  </Link>
                 </div>
               </div>
 

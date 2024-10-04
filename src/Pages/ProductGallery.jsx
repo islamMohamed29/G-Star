@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProductGallery.css";
+import RecentlyViewed from "../components/RecentlyViewed/RecentlyViewed";
 
-const ProductGallery = ({ images, selectedImage  }) => {
+const ProductGallery = ({ images, selectedImage }) => {
   const [currentImage, setCurrentImage] = useState(selectedImage);
   const [isZoomed, setIsZoomed] = useState(false);
 
@@ -43,7 +44,7 @@ const ProductGallery = ({ images, selectedImage  }) => {
             alt=""
             onClick={() => setCurrentImage(image.large)}
             className={`thumbnail ${
-              currentImage  === image.large ? "selected" : ""
+              currentImage === image.large ? "selected" : ""
             }`}
           />
         ))}

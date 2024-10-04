@@ -1,20 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import products from "../json/products";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProductGallery from "./ProductGallery.jsx";
 import SvgPant from "../components/Shop/SvgPant.jsx";
+import RecentlyViewed from "../components/RecentlyViewed/RecentlyViewed.jsx";
+import { addItem } from "../redux/slices/cart-slice.js";
 
 export default function ProductDetails() {
   const detailsRef = useRef(null);
-
+  let dispatch = useDispatch();
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColorImage, setSelectedColorImage] = useState(null);
-
+  const [selectedSize, setSelectedSize] = useState(null);
+  const cartData = useSelector((state) => state.cart.cartItems); // الحصول على العناصر الحالية في سلة التسوق
+  console.log(cartData, "cartData");
   const isOpen = useSelector((state) => state.layout.navOpen);
   let currentLanguage = localStorage.getItem("language")
     ? localStorage.getItem("language")
@@ -32,7 +36,7 @@ export default function ProductDetails() {
 
   useEffect(() => {
     const foundProduct = products.find((product) => product.id === Number(id));
-    console.log(foundProduct, "foundProduct");
+
     if (
       foundProduct &&
       foundProduct.colorPanel &&
@@ -43,38 +47,59 @@ export default function ProductDetails() {
 
       setSelectedColor(initialColor);
       const initialImages = foundProduct.gallery[initialColor] || [];
-      console.log(initialImages[0], "initialImages");
       setGalleryImages(initialImages);
       setSelectedImage(initialImages[0]?.large || "");
       setSelectedColorImage(foundProduct.colorPanel[0]?.image);
     }
   }, [id]);
 
-  // function handleColorChange(color) {
-  //   const colorImage = product[0].colorPanel.find(c => c.color === color)?.image;
-
-  //   if (colorImage) {
-  //     const updatedGallery = product[0].gallery.filter(img =>
-  //       img.color === color
-  //     );
-
-  //     if (updatedGallery.length > 0) {
-  //       setGalleryImages(updatedGallery);
-  //       setSelectedColor(color);
-  //       setSelectedImage(updatedGallery[0].large);
-  //     }
-  //   }
-  // }
   function handleColorChange(color, image) {
     if (product && product.gallery && product.gallery[color]) {
       const updatedGallery = product.gallery[color] || [];
       setGalleryImages(updatedGallery);
       setSelectedColor(color);
       setSelectedImage(updatedGallery[0]?.large || "");
-      console.log(image, "image");
+
       setSelectedColorImage(image);
     }
   }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert("الرجاء اختيار المقاس أولاً!");
+      return;
+    }
+
+    const availableStock = product.stockBySize[selectedSize];
+    if (!availableStock || availableStock <= 0) {
+      alert("عذراً، هذا المقاس غير متوفر حالياً.");
+      return;
+    }
+
+    const existingCartItem = cartData.find(
+      (item) => item.id === product.id && item.selectedSize === selectedSize
+    );
+
+    if (existingCartItem) {
+      if (existingCartItem.quantity >= availableStock) {
+        alert(
+          `عذراً، لا يمكن إضافة المزيد من هذا المنتج. الكمية القصوى المتاحة هي ${availableStock}.`
+        );
+        return;
+      }
+    }
+
+    // إرسال العنصر الجديد أو تحديث الكمية
+    dispatch(
+      addItem({
+        ...product,
+        selectedSize,
+        selectedColor,
+        quantity: 1,
+        availableStock,
+      })
+    );
+  };
 
   return (
     <main className="product_details">
@@ -132,10 +157,38 @@ export default function ProductDetails() {
                     <p className="size special-gray-title-13 m-0">size</p>
                     <div className="panel">
                       <ul className="my-6">
-                        {product.sizes &&
+                        {/* {product.sizes &&
                           product.sizes.map((size, index) => (
-                            <li key={index}>{size}</li>
-                          ))}
+                            <li
+                              className={
+                                selectedSize === size ? "selected-size" : ""
+                              }
+                              onClick={() => setSelectedSize(size)}
+                              key={index}
+                            >
+                              {size}
+                            </li>
+                          ))} */}
+                        {product.sizes &&
+                          product.sizes.map((size, index) => {
+                            const isAvailable =
+                              product.stockBySize &&
+                              product.stockBySize[size] > 0;
+                            return (
+                              <li
+                                className={`size-item ${
+                                  selectedSize === size ? "selected-size" : ""
+                                } ${!isAvailable ? "disabled-size" : ""}`}
+                                onClick={() =>
+                                  isAvailable && setSelectedSize(size)
+                                }
+                                key={index}
+                                aria-disabled={!isAvailable}
+                              >
+                                {size}
+                              </li>
+                            );
+                          })}
                       </ul>
                     </div>
                   </div>
@@ -143,7 +196,13 @@ export default function ProductDetails() {
                     <p>Product is available</p>
                   </div>
                   <div className="buttons-area">
-                    <button className="add_cart">add to bag</button>
+                    <button
+                      onClick={handleAddToCart}
+                      // disabled={!selectedSize}
+                      className="add_cart"
+                    >
+                      add to bag
+                    </button>
                     <button className="add_wishlist">
                       <i className="fa-regular fa-heart"></i>
                     </button>
@@ -364,6 +423,7 @@ export default function ProductDetails() {
             <div>Loading...</div>
           )}
         </div>
+        <RecentlyViewed />
       </div>
     </main>
   );

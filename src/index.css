@@ -494,7 +494,7 @@ main.shop-all header .banner-content div {
 main.shop-all section.products_shop_all {
   padding: 80px 0;
 }
-main.shop-all section.products_shop_all .row {
+section.products_shop_all .row {
   row-gap: 50px;
 }
 main.shop-all section.products_shop_all .head-section {
@@ -507,6 +507,7 @@ main.shop-all section.products_shop_all .head-section {
 }
 main.shop-all section.products_shop_all .head-section .filter {
   display: flex;
+  flex-wrap: wrap;
 }
 
 main.shop-all section.products_shop_all .head-section .filter button {
@@ -1151,6 +1152,18 @@ ul.parentFilterPanel li {
   border-bottom-width: 3px;
   font-weight: bold;
 }
+.product_details .sizing-area .panel ul li.disabled-size {
+  border-color: rgb(138, 147, 154);
+  color: rgb(138, 147, 154);
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 25.5px,
+    rgb(138, 147, 154) 26.5px,
+    rgb(138, 147, 154) 26.5px
+  );
+  cursor: not-allowed;
+}
 
 .product_details .is-available p {
   color: #12a100;
@@ -1238,7 +1251,6 @@ ul.parentFilterPanel li {
 .product_details .details_area .location_ups .ups .icon {
   width: 10px;
   height: 10px;
-
   margin-right: 15px;
   font-size: 12px;
 }
