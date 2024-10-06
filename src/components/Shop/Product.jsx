@@ -11,17 +11,17 @@ const Product = ({ product, currentColor, handleColorHover }) => {
       <div className="product">
         <Link to={`/shop/product/${product.id}`}>
           <img
-            src={`/products/product-1/${product.mainImage}`}
+            src={`${product.mainImage}`}
             alt={`${product.name}`}
             className="main-image"
           />
           <img
-            src={`/products/product-1/${product.hoverImage}`}
+            src={`${product.hoverImage}`}
             alt={`${product.name}`}
             className="hover-image"
           />
           <img
-            src={`/products/product-1/${
+            src={`${
               currentColor ? product.images[currentColor] : product.hoverImage
             }`}
             className="hover-image"
@@ -34,7 +34,7 @@ const Product = ({ product, currentColor, handleColorHover }) => {
           <div className="info">
             <div className="top-info">
               <div className="name">{product.name}</div>
-              <div className="price">{product.price} EGP</div>
+              <div className="price">{product.price} €</div>
             </div>
             <div className="colors">
               <div className="list-colors">

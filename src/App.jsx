@@ -10,6 +10,9 @@ import Shop from "./Pages/Shop";
 import ProductDetails from "./Pages/ProductDetails";
 import ProtectedRoute from "./components/helpers/ProtectedRoute.jsx";
 import ScrollToTop from "./components/helpers/ScrollToTop.jsx";
+import { element } from "prop-types";
+import CheckOut from "./Pages/CheckOut.jsx";
+import LayoutWithoutFooter from "./Pages/LayoutWithoutFooter.jsx";
 
 function App() {
   const routes = [
@@ -35,9 +38,15 @@ function App() {
             </ProtectedRoute>
           ),
         },
+
         { path: "shop/product/:id", element: <ProductDetails /> },
         { path: "*", element: <NotFound /> },
       ],
+    },
+    {
+      path: "/checkout",
+      element: <LayoutWithoutFooter />,
+      children: [{ path: "shopping-bag", element: <CheckOut /> }],
     },
   ];
   return (

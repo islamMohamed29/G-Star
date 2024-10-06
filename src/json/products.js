@@ -1,24 +1,14 @@
 export default [
   {
     id: 1,
-    name: "T-Shirt",
-    mainImage: "front-1.jpg",
-    hoverImage: "back-1.jpg",
+    name: "Nifous T-Shirt",
+    mainImage: "/product_2/g-star-nifous-t-shirt-red-main.jpg",
+    hoverImage: "/product_2/g-star-nifous-t-shirt-red-hover.jpg",
     alt: "Distressed Logo T-Shirt",
-    price: 540,
-    sizes: ["44", "28", "29", "38"],
-    lengths: ["26", "28", "30"],
+    price: 39.95,
     brand: "Outfits",
-    productType: "shirt",
-    category: "Jeans",
-    stockBySize: {
-      44: 1,
-      28: 2,
-      29: 3,
-      38: 0,
-      50: 5,
-      60: 2,
-    },
+    category: "T-Shirts",
+    gender: "men",
     images: {
       beg: "color-1.jpg",
       rose: "color-2.jpg",
@@ -28,72 +18,118 @@ export default [
     gallery: {
       "dark black garment dyed": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-black.jpg",
-          large: "/g-star-raw-nifous-t-shirt-black11.avif",
+          thumbnail: "/product_2/g-star-raw-nifous-t-shirt-black.jpg",
+          large: "/product_2/g-star-raw-nifous-t-shirt-black11.avif",
         },
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-blac22222k.avif",
-          large: "/86aog-genjd.jpg",
+          thumbnail: "/product_2/g-star-raw-nifous-t-shirt-blac22222k.avif",
+          large: "/product_2/86aog-genjd.jpg",
         },
       ],
       "shadow olive": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-green.jpg",
-          large: "/g-star-raw-nifous-t-shirt-green22.avif",
+          thumbnail: "/product_2/g-star-raw-nifous-t-shirt-green.jpg",
+          large: "/product_2/g-star-raw-nifous-t-shirt-green22.avif",
         },
       ],
       "rusty red gd": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-red (1).jpg",
-          large: "/g-star-raw-nifous-t-shirt-red33.avif",
+          thumbnail: "/product_2/g-star-raw-nifous-t-shirt-red (1).jpg",
+          large: "/product_2/g-star-raw-nifous-t-shirt-red33.avif",
         },
       ],
       white: [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-white.jpg",
-          large: "/g-star-raw-nifous-t-shirt-white44.avif",
+          thumbnail: "/product_2/g-star-raw-nifous-t-shirt-white.jpg",
+          large: "/product_2/g-star-raw-nifous-t-shirt-white44.avif",
         },
       ],
       "imperial blue": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-dark-blue.jpg",
-          large: "/g-star-raw-nifous-t-shirt-dark-blue55.avif",
+          thumbnail: "/product_2/g-star-raw-nifous-t-shirt-dark-blue.jpg",
+          large: "/product_2/g-star-raw-nifous-t-shirt-dark-blue55.avif",
         },
       ],
     },
     colorPanel: [
       {
         color: "dark black garment dyed",
-        image: "/g-star-raw-nifous-t-shirt-black.jpg",
+        image: "/product_2/g-star-raw-nifous-t-shirt-black.jpg",
+        stockBySize: {
+          XXS: 100,
+          XS: 500,
+          S: 1,
+          M: 5,
+          L: 6,
+          XL: 3,
+          XXL: 0,
+        },
       },
-      { color: "shadow olive", image: "/g-star-raw-nifous-t-shirt-green.jpg" },
-      { color: "rusty red gd", image: "/g-star-raw-nifous-t-shirt-red.jpg" },
-      { color: "white", image: "/g-star-raw-nifous-t-shirt-white.jpg" },
+      {
+        color: "shadow olive",
+        image: "/product_2/g-star-raw-nifous-t-shirt-green.jpg",
+        stockBySize: {
+          XXS: 5,
+          XS: 10,
+          S: 0,
+          M: 20,
+          L: 15,
+          XL: 0,
+          XXL: 2,
+        },
+      },
+      {
+        color: "rusty red gd",
+        image: "/product_2/g-star-raw-nifous-t-shirt-red.jpg",
+        stockBySize: {
+          XXS: 5,
+          XS: 10,
+          S: 0,
+          M: 20,
+          L: 15,
+          XL: 0,
+          XXL: 2,
+        },
+      },
+      {
+        color: "white",
+        image: "/product_2/g-star-raw-nifous-t-shirt-white.jpg",
+        stockBySize: {
+          XXS: 5,
+          XS: 10,
+          S: 0,
+          M: 20,
+          L: 15,
+          XL: 0,
+          XXL: 2,
+        },
+      },
       {
         color: "imperial blue",
-        image: "/g-star-raw-nifous-t-shirt-dark-blue.jpg",
+        image: "/product_2/g-star-raw-nifous-t-shirt-dark-blue.jpg",
+        stockBySize: {
+          XXS: 5,
+          XS: 10,
+          S: 0,
+          M: 20,
+          L: 15,
+          XL: 0,
+          XXL: 2,
+        },
       },
     ],
   },
+
   {
     id: 2,
-    name: "Nifous T-Shirt",
-    mainImage: "front-1.jpg",
-    hoverImage: "back-1.jpg",
+    name: "Nifous Zip Thru Sweater",
+    mainImage: "/product_1/g-star-nifous-zip-thru-sweater-green (9).jpg",
+    hoverImage: "/product_1/g-star-nifous-zip-thru-sweater-green.jpg",
     alt: "Distressed Logo T-Shirt",
-    price: 430,
-    sizes: ["44", "28", "29", "38", "50", "60"],
-    lengths: ["26", "28", "30"],
+    price: 99.95,
     brand: "Outfits",
-    category: "Jeans",
-    stockBySize: {
-      44: 7,
-      28: 3,
-      29: 0,
-      38: 9,
-      50: 0,
-      60: 2,
-    },
+    category: "Sweats",
+    gender: "men",
     images: {
       beg: "color-1.jpg",
       rose: "color-2.jpg",
@@ -101,52 +137,42 @@ export default [
       gray: "color-4.jpg",
     },
     gallery: {
-      "dark black garment dyed": [
-        {
-          thumbnail: "/g-star-raw-nifous-t-shirt-black.jpg",
-          large: "/g-star-raw-nifous-t-shirt-black11.avif",
-        },
-        {
-          thumbnail: "/g-star-raw-nifous-t-shirt-blac22222k.avif",
-          large: "/86aog-genjd.jpg",
-        },
-      ],
       "shadow olive": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-green.jpg",
-          large: "/g-star-raw-nifous-t-shirt-green22.avif",
+          thumbnail: "/product_1/g-star-nifous-zip-thru-sweater-green (23).jpg",
+          large: "/product_1/g-star-nifous-zip-thru-sweater-green (21).jpg",
         },
-      ],
-      "rusty red gd": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-red (1).jpg",
-          large: "/g-star-raw-nifous-t-shirt-red33.avif",
+          thumbnail: "/product_1/g-star-nifous-zip-thru-sweater-green (40).jpg",
+          large: "/product_1/g-star-nifous-zip-thru-sweater-green (37).jpg",
         },
-      ],
-      white: [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-white.jpg",
-          large: "/g-star-raw-nifous-t-shirt-white44.avif",
+          thumbnail: "/product_1/g-star-nifous-zip-thru-sweater-green.jpg",
+          large: "/product_1/g-star-nifous-zip-thru-sweater-green 21.jpg",
         },
-      ],
-      "imperial blue": [
         {
-          thumbnail: "/g-star-raw-nifous-t-shirt-dark-blue.jpg",
-          large: "/g-star-raw-nifous-t-shirt-dark-blue55.avif",
+          thumbnail: "/product_1/g-star-nifous-zip-thru-sweater-green (48).jpg",
+          large: "/product_1/g-star-nifous-zip-thru-sweater-green (45).jpg",
+        },
+        {
+          thumbnail: "/product_1/g-star-nifous-zip-thru-sweater-green (9).jpg",
+          large: "/product_1/g-star-nifous-zip-thru-sweater-green (6).jpg",
         },
       ],
     },
     colorPanel: [
       {
-        color: "dark black garment dyed",
-        image: "/g-star-raw-nifous-t-shirt-black.jpg",
-      },
-      { color: "shadow olive", image: "/g-star-raw-nifous-t-shirt-green.jpg" },
-      { color: "rusty red gd", image: "/g-star-raw-nifous-t-shirt-red.jpg" },
-      { color: "white", image: "/g-star-raw-nifous-t-shirt-white.jpg" },
-      {
-        color: "imperial blue",
-        image: "/g-star-raw-nifous-t-shirt-dark-blue.jpg",
+        color: "shadow olive",
+        image: "/product_1/g-star-nifous-zip-thru-sweater-green (40).jpg",
+        stockBySize: {
+          XXS: 0,
+          XS: 0,
+          S: 1,
+          M: 0,
+          L: 6,
+          XL: 3,
+          XXL: 0,
+        },
       },
     ],
   },

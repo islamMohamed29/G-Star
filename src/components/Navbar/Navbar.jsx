@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { navOpen } from "../../redux/slices/layout-slice";
 import Resources from "../../locales/Resources.json";
 import { Link } from "react-router-dom";
-import { removeItemCart } from "../../redux/slices/cart-slice";
+import { calcTotalItems, removeItemCart } from "../../redux/slices/cart-slice";
 export default function Navbar() {
   const { currentUser } = useSelector((state) => state.user);
   const [isClicked, setIsClicked] = useState(false);
@@ -13,7 +13,10 @@ export default function Navbar() {
     dispatch(navOpen(!isClicked));
   };
   let cartData = useSelector((state) => state.cart.cartItems);
-
+  let subTotal = useSelector((state) => state.cart.subTotal);
+  let tax = useSelector((state) => state.cart.tax);
+  let totalAmount = useSelector((state) => state.cart.totalAmount);
+  let totalCartItems = useSelector((state) => state.cart.totalItems);
   const handleLang = (e) => {
     localStorage.setItem("language", e.target.value);
     window.location.reload();
@@ -21,31 +24,20 @@ export default function Navbar() {
   let currentLanguage = localStorage.getItem("language")
     ? localStorage.getItem("language")
     : "en";
-  // let cartData = localStorage.getItem("cartData")
-  //   ? JSON.parse(localStorage.getItem("cartData"))
-  //   : [];
-  // const [shippingCost, setShippingCost] = useState(0);
-  const [taxCost, setTaxCost] = useState(0);
-  const [subTotal, setSubTotal] = useState(0);
-  const [totalAmount, setTotalAmount] = useState(0);
+  // const [totalCartItems, setTotalCartItems] = useState(0);
 
-  // Function to calculate all costs
-  const calculateCosts = () => {
-    const subTotal = cartData.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-    const taxCost = subTotal * 0.15;
-    const totalAmount = subTotal + taxCost;
+  // const calculateCosts = () => {
+  //   const totalItems = cartData.reduce((acc, item) => acc + item.quantity, 0);
+  //   setTotalCartItems(totalItems);
+  // };
 
-    setSubTotal(subTotal.toFixed(2));
-    setTaxCost(taxCost.toFixed(2));
-    setTotalAmount(totalAmount.toFixed(2));
-  };
-
+  // useEffect(() => {
+  //   calculateCosts();
+  // }, [cartData]);
   useEffect(() => {
-    calculateCosts();
-  }, [cartData]);
+    dispatch(calcTotalItems());
+  }, [dispatch]);
+
   return (
     <>
       <nav>
@@ -116,14 +108,15 @@ export default function Navbar() {
                     </p>
                     {!currentUser && (
                       <Fragment>
-                        <Link to={"login"} className="btn_large full_Width">
-                          <p>Login</p>
+                        <Link className="large_link full_Width" to={"login"}>
+                          Login
                         </Link>
+
                         <Link
+                          className="large_link full_Width gray"
                           to={"register"}
-                          className="btn_large full_Width gray"
                         >
-                          <p>Create Account</p>
+                          Create Account
                         </Link>
                       </Fragment>
                     )}
@@ -134,7 +127,8 @@ export default function Navbar() {
             <div className="cart">
               <Link className="shopping-cart">
                 <Link className="cart_icon" to={"/checkout/shopping-bag"}>
-                  <i className="fa-solid fa-cart-shopping"></i>
+                  <i className="fa-solid fa-cart-shopping"></i>{" "}
+                  <span>{totalCartItems >= 100 ? `99+` : totalCartItems}</span>
                 </Link>
 
                 <div className="shopping_cart_panel">
@@ -163,8 +157,15 @@ export default function Navbar() {
                               </span>
                               <div className="image">
                                 <img
-                                  src="/products/product-1/back-1.jpg"
-                                  alt=""
+                                  // src="/products/product-1/back-1.jpg"
+                                  src={
+                                    productCart.colorPanel.find(
+                                      (color) =>
+                                        color.color ===
+                                        productCart.selectedColor
+                                    )?.image || ""
+                                  }
+                                  alt={productCart.name}
                                 />
                               </div>
                               <div className="details">
@@ -177,51 +178,60 @@ export default function Navbar() {
                                   </p>
                                 </div>
                                 <div className="bottom">
-                                  {/* category / color name / W34 L32 / 1 */}
                                   <p>
-                                    {productCart.category} /
-                                    {productCart.colorPanel[0].color} / W
-                                    {productCart.sizes[0]} L
-                                    {productCart.lengths[0]} /{" "}
-                                    {productCart.quantity}{" "}
+                                    {productCart.category} /{" "}
+                                    {productCart.selectedColor} /{" "}
+                                    {productCart.selectedSize} /{" "}
+                                    {productCart.quantity}
                                   </p>
                                 </div>
                               </div>
                             </li>
                           ))}
                           <div className="line_section"></div>
-                          <div className="price_details">
-                            <div className="sub_details">
-                              <ul>
-                                <li>
-                                  <p className="name">Subtotal</p>
-                                  <p className="data">{subTotal}</p>
-                                </li>
-                                <li>
-                                  <p className="name">Shipping</p>
-                                  <p className="data">Free</p>
-                                </li>
-                                <li>
-                                  <p className="name">Tax</p>
-                                  <p className="data">{taxCost}</p>
-                                </li>
-                                <li className="total">
-                                  <div className="name">Total</div>
-                                  <div className="data">{totalAmount}</div>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
                         </ul>
+                        <div className="price_details">
+                          <div className="sub_details">
+                            <ul>
+                              <li>
+                                <p className="name">Subtotal</p>
+                                <p className="data">{subTotal}</p>
+                              </li>
+                              <li>
+                                <p className="name">Shipping</p>
+                                <p className="data">Free</p>
+                              </li>
+                              <li>
+                                <p className="name">Tax</p>
+                                <p className="data">{tax}</p>
+                              </li>
+                              <li className="total">
+                                <div className="name">Total</div>
+                                <div className="data">{totalAmount}</div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
                       </>
                     )}
 
                     {!cartData.length > 0 && (
-                      <p className="cart_empty">your shopping bag is empty</p>
+                      <>
+                        <p className="cart_empty">your shopping bag is empty</p>
+                        <Link className="large_link" to={"/shop"}>
+                          containue shopping
+                        </Link>
+                      </>
                     )}
-                    <div className="btn_large">
-                      <p>containue shopping</p>
-                    </div>
+
+                    {cartData.length > 0 && (
+                      <Link
+                        className="large_link"
+                        to={"/checkout/shopping-bag"}
+                      >
+                        checkout
+                      </Link>
+                    )}
                   </div>
                 </div>
               </Link>

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import FilterPanel from "./FilterPanel";
 import Api from "../dependencies/instanceAxios";
 import Product from "../components/Shop/Product";
+import TopBar from "../components/TopBar";
 
 const initialFilters = {
   priceRange: [0, Infinity],
@@ -68,6 +69,8 @@ export default function Shop() {
             );
           }
         } else {
+          console.log(filtered, "filtered");
+          console.log(key, "key");
           filtered = filtered.filter((product) =>
             filters[key].includes(product[key])
           );
@@ -89,13 +92,7 @@ export default function Shop() {
   return (
     <main className="shop-all">
       <div className={`custom-container ${isOpen ? "nav-open" : ""}`}>
-        <div className="top-bar">
-          <ul>
-            <li>{Resources["springUpdate"][currentLanguage]}</li>
-            <li>Free shipping</li>
-            <li>Free 60 day returns</li>
-          </ul>
-        </div>
+        <TopBar />
         <header>
           <picture className="top-banner-image">
             <source

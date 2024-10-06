@@ -5,8 +5,20 @@ body {
   padding: 0;
   font-family: "Roboto", sans-serif;
 }
+.basic_title {
+  font-weight: bold;
+  margin: 0;
+  color: #303030;
+  font-size: 20px;
+}
 main.product_details {
   padding: 54px 0;
+}
+span.icon_right {
+  margin-left: 6px;
+}
+span.icon_left {
+  margin-right: 6px;
 }
 ul {
   list-style: none;
@@ -451,20 +463,6 @@ main.home section.latest-social .view-more-btn a:hover {
   width: calc(100% - 250px);
   margin-left: 250px;
   transition: 0.2s ease-in;
-}
-.custom-container .top-bar {
-  margin-top: 54px;
-  padding: 10px 0;
-  background: #fff;
-}
-.custom-container .top-bar ul {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  list-style: none;
-  font-size: 13px;
-  height: 100%;
-  font-weight: bold;
 }
 
 main.shop-all header {
@@ -1151,6 +1149,7 @@ ul.parentFilterPanel li {
 .product_details .sizing-area .panel ul li.selected-size {
   border-bottom-width: 3px;
   font-weight: bold;
+  position: relative;
 }
 .product_details .sizing-area .panel ul li.disabled-size {
   border-color: rgb(138, 147, 154);
@@ -1170,6 +1169,13 @@ ul.parentFilterPanel li {
   font-size: 13px;
   font-weight: 500;
   margin: 15px 0 5px;
+}
+.product_details .low_stock_msg p {
+  color: red;
+  font-size: 12px;
+}
+.product_details .low_stock_msg p span {
+  font-weight: bold;
 }
 .product_details .buttons-area {
   display: flex;
@@ -1193,6 +1199,7 @@ ul.parentFilterPanel li {
   height: 40px;
   color: #fff;
   font-size: 14px;
+  position: relative;
 }
 .product_details .buttons-area .add_cart:hover {
   background-color: transparent;
@@ -1253,4 +1260,57 @@ ul.parentFilterPanel li {
   height: 10px;
   margin-right: 15px;
   font-size: 12px;
+}
+
+/* Animation  */
+.quantity-increment {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4caf50;
+  opacity: 0;
+  animation: popAndFade 1s ease-out;
+  z-index: 999;
+}
+@keyframes popAndFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+/* test  */
+
+.color-thumbnail {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: transform 0.2s;
+}
+
+.color-thumbnail:hover {
+  transform: scale(1.2);
+  border-color: #333;
+}
+
+.color-item {
+  display: inline-block;
 }

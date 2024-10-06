@@ -7,9 +7,12 @@ const GenderFilter = ({ setFilters }) => {
       let updatedGenderFilters;
 
       if (checked) {
+        console.log(checked, "checkd");
         updatedGenderFilters = prevFilters.gender.includes(name)
           ? prevFilters.gender
           : [...prevFilters.gender, name];
+
+        console.log(updatedGenderFilters, "updatedGenderFilters");
       } else {
         updatedGenderFilters = prevFilters.gender.filter(
           (gender) => gender !== name

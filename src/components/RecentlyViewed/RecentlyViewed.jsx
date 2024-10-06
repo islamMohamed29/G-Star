@@ -32,7 +32,10 @@ const RecentlyViewed = () => {
   return (
     <section className="products_shop_all">
       <div className="products">
-        <div className="container ">
+        <div className="container  pt-4 ">
+          <div className="special-head pb-2 ">
+            <h2>Recently Viewed</h2>
+          </div>
           <div className="row">
             {recentlyViewed.map((product, index) => (
               <Product

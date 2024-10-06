@@ -6,6 +6,9 @@ import ProductGallery from "./ProductGallery.jsx";
 import SvgPant from "../components/Shop/SvgPant.jsx";
 import RecentlyViewed from "../components/RecentlyViewed/RecentlyViewed.jsx";
 import { addItem } from "../redux/slices/cart-slice.js";
+import { notifyError, notifyWarning } from "../dependencies/Notification.js";
+import QuantityIncrementAnimation from "../dependencies/QuantityIncrementAnimation";
+import Resources from "../locales/Resources.json";
 
 export default function ProductDetails() {
   const detailsRef = useRef(null);
@@ -16,6 +19,8 @@ export default function ProductDetails() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColorImage, setSelectedColorImage] = useState(null);
+  const [lowStockMessage, setLowStockMessage] = useState(""); // حالة لتخزين الرسالة
+
   const [selectedSize, setSelectedSize] = useState(null);
   const cartData = useSelector((state) => state.cart.cartItems); // الحصول على العناصر الحالية في سلة التسوق
   console.log(cartData, "cartData");
@@ -59,37 +64,49 @@ export default function ProductDetails() {
       setGalleryImages(updatedGallery);
       setSelectedColor(color);
       setSelectedImage(updatedGallery[0]?.large || "");
-
       setSelectedColorImage(image);
+      setSelectedSize(null);
     }
   }
-
+  const [showAnimation, setShowAnimation] = useState(false);
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("الرجاء اختيار المقاس أولاً!");
+      notifyWarning(Resources["selectSizeFirst"][currentLanguage]);
       return;
     }
+    const selectedColorStock = product.colorPanel.find(
+      (color) => color.color === selectedColor
+    )?.stockBySize;
 
-    const availableStock = product.stockBySize[selectedSize];
+    if (!selectedColorStock || !selectedColorStock[selectedSize]) {
+      alert("عذراً، هذا المقاس غير متوفر حالياً.");
+      return;
+    }
+    const availableStock = selectedColorStock[selectedSize];
+    // const availableStock = product.stockBySize[selectedSize];
     if (!availableStock || availableStock <= 0) {
       alert("عذراً، هذا المقاس غير متوفر حالياً.");
       return;
     }
 
     const existingCartItem = cartData.find(
-      (item) => item.id === product.id && item.selectedSize === selectedSize
+      (item) =>
+        item.id === product.id &&
+        item.selectedColor === selectedColor &&
+        item.selectedSize === selectedSize
     );
 
     if (existingCartItem) {
       if (existingCartItem.quantity >= availableStock) {
-        alert(
-          `عذراً، لا يمكن إضافة المزيد من هذا المنتج. الكمية القصوى المتاحة هي ${availableStock}.`
+        notifyWarning(
+          `${Resources["cannotAddMore"][currentLanguage]} + ${availableStock}.`
         );
         return;
       }
+      setShowAnimation(false);
+      setTimeout(() => setShowAnimation(true), 10);
     }
 
-    // إرسال العنصر الجديد أو تحديث الكمية
     dispatch(
       addItem({
         ...product,
@@ -100,7 +117,26 @@ export default function ProductDetails() {
       })
     );
   };
+  function handleSizeChange(size) {
+    setSelectedSize(size);
 
+    const selectedColorStock = product.colorPanel.find(
+      (color) => color.color === selectedColor
+    )?.stockBySize;
+    console.log(selectedColorStock, "selectedColorStock");
+
+    if (selectedColorStock && selectedColorStock[size] <= 2) {
+      setLowStockMessage(
+        <>
+          The available quantity of this size <strong>{size}</strong> for the{" "}
+          <strong>{selectedColor}</strong> color is only{" "}
+          <strong>{selectedColorStock[size]}</strong>!
+        </>
+      );
+    } else {
+      setLowStockMessage(""); // عدم عرض الرسالة إذا كانت الكمية أكبر من 2
+    }
+  }
   return (
     <main className="product_details">
       <div className={`custom-container ${isOpen ? "nav-open" : ""}`}>
@@ -169,7 +205,7 @@ export default function ProductDetails() {
                               {size}
                             </li>
                           ))} */}
-                        {product.sizes &&
+                        {/* {product.sizes &&
                           product.sizes.map((size, index) => {
                             const isAvailable =
                               product.stockBySize &&
@@ -188,12 +224,43 @@ export default function ProductDetails() {
                                 {size}
                               </li>
                             );
+                          })} */}
+                        {selectedColor &&
+                          product.colorPanel.find(
+                            (color) => color.color === selectedColor
+                          )?.stockBySize &&
+                          Object.keys(
+                            product.colorPanel.find(
+                              (color) => color.color === selectedColor
+                            ).stockBySize
+                          ).map((size, index) => {
+                            const availableStock = product.colorPanel.find(
+                              (color) => color.color === selectedColor
+                            ).stockBySize[size];
+                            const isAvailable = availableStock > 0;
+                            return (
+                              <li
+                                key={index}
+                                className={`size-item ${
+                                  selectedSize === size ? "selected-size" : ""
+                                } ${!isAvailable ? "disabled-size" : ""}`}
+                                onClick={() =>
+                                  isAvailable && handleSizeChange(size)
+                                }
+                                aria-disabled={!isAvailable}
+                              >
+                                {size}
+                              </li>
+                            );
                           })}
                       </ul>
                     </div>
                   </div>
                   <div className="is-available">
                     <p>Product is available</p>
+                  </div>
+                  <div className="low_stock_msg">
+                    <p>{lowStockMessage}</p>
                   </div>
                   <div className="buttons-area">
                     <button
@@ -202,6 +269,7 @@ export default function ProductDetails() {
                       className="add_cart"
                     >
                       add to bag
+                      {showAnimation && <QuantityIncrementAnimation />}
                     </button>
                     <button className="add_wishlist">
                       <i className="fa-regular fa-heart"></i>

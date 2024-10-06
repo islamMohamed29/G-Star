@@ -1,0 +1,20 @@
+.top_bar {
+  margin-top: 54px;
+  padding: 10px 0;
+  background-color: #fff;
+  color: #000;
+}
+.top_bar ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+  font-size: 13px;
+  height: 100%;
+  font-weight: bold;
+}
+
+.top_bar.is_dark {
+  color: #fff;
+  background-color: #1a1a1a;
+}

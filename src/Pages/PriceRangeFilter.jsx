@@ -67,7 +67,7 @@ const PriceRangeCheckboxes = ({ setFilters }) => {
             className="filterCheckBox"
             onChange={handleCheckboxChange}
           />
-          <label htmlFor="price0to500CheckBox">0-500 EGP</label>
+          <label htmlFor="price0to500CheckBox">0-500 €</label>
         </li>
         <li>
           <input
@@ -77,7 +77,7 @@ const PriceRangeCheckboxes = ({ setFilters }) => {
             className="filterCheckBox"
             onChange={handleCheckboxChange}
           />
-          <label htmlFor="price500to1000CheckBox">500-1000 EGP</label>
+          <label htmlFor="price500to1000CheckBox">500-1000 €</label>
         </li>
         <li>
           <input
@@ -87,7 +87,7 @@ const PriceRangeCheckboxes = ({ setFilters }) => {
             className="filterCheckBox"
             onChange={handleCheckboxChange}
           />
-          <label htmlFor="price1000to2500CheckBox">1000-2500 EGP</label>
+          <label htmlFor="price1000to2500CheckBox">1000-2500 €</label>
         </li>
         <li>
           <input
@@ -97,7 +97,7 @@ const PriceRangeCheckboxes = ({ setFilters }) => {
             className="filterCheckBox"
             onChange={handleCheckboxChange}
           />
-          <label htmlFor="price2500orMoreCheckBox">2500 EGP or more</label>
+          <label htmlFor="price2500orMoreCheckBox">2500 € or more</label>
         </li>
       </ul>
     </div>

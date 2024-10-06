@@ -9,8 +9,9 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "swiper/css";
 import "swiper/css/pagination";
-import "./index.css";
+
 import "./sass/main.scss";
+import "./index.css";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
 

@@ -81,7 +81,7 @@
   transform: scale(1.5);
   cursor: zoom-out;
   position: fixed;
-  top: 0;
+  top: 54px;
   left: 0;
   width: 100vw;
   height: 100vh;
