@@ -1,0 +1,119 @@
+.loader_container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background: linear-gradient(
+        0deg,
+        rgb(0 0 0/50%) 30%,
+        #0000 0 70%,
+        rgb(0 0 0/100%) 0
+      )
+      50%/8% 100%,
+    linear-gradient(90deg, rgb(0 0 0/25%) 30%, #0000 0 70%, rgb(0 0 0/75%) 0)
+      50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+.loader::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+@keyframes l23 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+// .loader {
+//   width: fit-content;
+//   font-size: 17px;
+//   font-family: monospace;
+//   line-height: 1.4;
+//   font-weight: bold;
+//   --c: no-repeat linear-gradient(#000 0 0);
+//   background: var(--c), var(--c), var(--c), var(--c), var(--c), var(--c),
+//     var(--c);
+//   background-size: calc(1ch + 1px) 100%;
+//   border-bottom: 10px solid #0000;
+//   position: relative;
+//   animation: l8-0 3s infinite linear;
+//   clip-path: inset(-20px 0);
+// }
+// .loader::before {
+//   content: "Loading";
+// }
+// .loader::after {
+//   content: "";
+//   position: absolute;
+//   width: 10px;
+//   height: 14px;
+//   background: #25adda;
+//   left: -10px;
+//   bottom: 100%;
+//   animation: l8-1 3s infinite linear;
+// }
+// @keyframes l8-0 {
+//   0%,
+//   12.5% {
+//     background-position: calc(0 * 100% / 6) 0, calc(1 * 100% / 6) 0,
+//       calc(2 * 100% / 6) 0, calc(3 * 100% / 6) 0, calc(4 * 100% / 6) 0,
+//       calc(5 * 100% / 6) 0, calc(6 * 100% / 6) 0;
+//   }
+//   25% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 0,
+//       calc(2 * 100% / 6) 0, calc(3 * 100% / 6) 0, calc(4 * 100% / 6) 0,
+//       calc(5 * 100% / 6) 0, calc(6 * 100% / 6) 0;
+//   }
+//   37.5% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 40px,
+//       calc(2 * 100% / 6) 0, calc(3 * 100% / 6) 0, calc(4 * 100% / 6) 0,
+//       calc(5 * 100% / 6) 0, calc(6 * 100% / 6) 0;
+//   }
+//   50% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 40px,
+//       calc(2 * 100% / 6) 40px, calc(3 * 100% / 6) 0, calc(4 * 100% / 6) 0,
+//       calc(5 * 100% / 6) 0, calc(6 * 100% / 6) 0;
+//   }
+//   62.5% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 40px,
+//       calc(2 * 100% / 6) 40px, calc(3 * 100% / 6) 40px, calc(4 * 100% / 6) 0,
+//       calc(5 * 100% / 6) 0, calc(6 * 100% / 6) 0;
+//   }
+//   75% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 40px,
+//       calc(2 * 100% / 6) 40px, calc(3 * 100% / 6) 40px, calc(4 * 100% / 6) 40px,
+//       calc(5 * 100% / 6) 0, calc(6 * 100% / 6) 0;
+//   }
+//   87.4% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 40px,
+//       calc(2 * 100% / 6) 40px, calc(3 * 100% / 6) 40px, calc(4 * 100% / 6) 40px,
+//       calc(5 * 100% / 6) 40px, calc(6 * 100% / 6) 0;
+//   }
+//   100% {
+//     background-position: calc(0 * 100% / 6) 40px, calc(1 * 100% / 6) 40px,
+//       calc(2 * 100% / 6) 40px, calc(3 * 100% / 6) 40px, calc(4 * 100% / 6) 40px,
+//       calc(5 * 100% / 6) 40px, calc(6 * 100% / 6) 40px;
+//   }
+// }
+// @keyframes l8-1 {
+//   100% {
+//     left: 115%;
+//   }
+// }

@@ -4,11 +4,35 @@
     padding: 0 80px;
   }
   .section_checkOut {
+    padding-bottom: 80px;
+    .wrap_cart_empty .header_link {
+      justify-content: start;
+      margin-top: 40px;
+      margin-left: 10px;
+    }
+    .cart_empty {
+      background-color: #fff;
+      position: relative;
+      height: 300px;
+      width: 100%;
+      p {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
     .head_section {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 30px 0;
+      &.no_items {
+        justify-content: center;
+      }
     }
     .grid_wrap {
       background-color: #fff;

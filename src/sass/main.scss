@@ -6,3 +6,10 @@
 @use "./components/buttons";
 @use "./components/topBar";
 @use "./pages/checkout";
+@use "./pages/home";
+@use "./pages/shop";
+@use "./pages/searchPage";
+@use "./utils/globals";
+@use "./pages/productDetails";
+@use "./components/sideAccordion";
+@use "./components/searchPanel";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProductGallery.css";
-import RecentlyViewed from "../components/RecentlyViewed/RecentlyViewed";
+import ImageWithLoader from "../components/Loading/ImageWithLoader";
 
 const ProductGallery = ({ images, selectedImage }) => {
   const [currentImage, setCurrentImage] = useState(selectedImage);
@@ -35,6 +35,14 @@ const ProductGallery = ({ images, selectedImage }) => {
           onMouseMove={handleMouseMove}
           onClick={handleClick}
         />
+        {/* <ImageWithLoader
+          src={currentImage}
+          alt={"Product"}
+          isZoomed={isZoomed} 
+          handleMouseMove={handleMouseMove}
+          handleClick={handleClick}
+          // className={`main-image ${isZoomed ? "zoomed" : ""}`}
+        /> */}
       </div>
       <div className="thumbnails">
         {images.map((image, index) => (

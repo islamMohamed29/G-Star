@@ -51,6 +51,7 @@ const cartSlice = createSlice({
         }
       } else {
         state.cartItems.push(action.payload);
+        notifySuccess("تمت إضافة العنصر إلى السلة");
       }
 
       addToLocalStorage(state.cartItems);
@@ -60,7 +61,6 @@ const cartSlice = createSlice({
       const tax = calculateTax(subtotal);
       state.tax = tax;
       state.totalAmount = calculateTotal(subtotal, tax);
-      notifySuccess("تمت إضافة العنصر إلى السلة");
     },
 
     removeItemCart: (state, action) => {

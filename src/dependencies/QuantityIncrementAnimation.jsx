@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../sass/components/_quantityIncrement.scss";
 const QuantityIncrementAnimation = () => {
   const [animate, setAnimate] = useState(false);
 

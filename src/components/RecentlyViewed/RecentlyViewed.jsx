@@ -30,7 +30,7 @@ const RecentlyViewed = () => {
   };
 
   return (
-    <section className="products_shop_all">
+    <section className="products_wrapper">
       <div className="products">
         <div className="container  pt-4 ">
           <div className="special-head pb-2 ">
@@ -38,12 +38,7 @@ const RecentlyViewed = () => {
           </div>
           <div className="row">
             {recentlyViewed.map((product, index) => (
-              <Product
-                key={index}
-                product={product}
-                currentColor={currentColor}
-                handleColorHover={handleColorHover}
-              />
+              <Product key={index} product={product} />
             ))}
           </div>
         </div>

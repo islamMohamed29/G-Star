@@ -6,6 +6,7 @@ import Resources from "../locales/Resources.json";
 
 import { Suspense } from "react";
 import { Pagination } from "swiper/modules";
+import TopBar from "../components/TopBar";
 
 export default function Home() {
   const isOpen = useSelector((state) => state.layout.navOpen);
@@ -15,13 +16,7 @@ export default function Home() {
   return (
     <main className="home">
       <div className={`custom-container ${isOpen ? "nav-open" : ""}`}>
-        <div className="top-bar">
-          <ul>
-            <li>{Resources["springUpdate"][currentLanguage]}</li>
-            <li>Free shipping</li>
-            <li>Free 60 day returns</li>
-          </ul>
-        </div>
+        <TopBar />
         <header>
           <picture className="top-banner-image">
             <source

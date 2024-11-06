@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setPriceRange } from "../../redux/slices/filter-slice";
 
-const PriceRangeCheckboxes = ({ setFilters }) => {
+const PriceRangeCheckboxes = () => {
+  const dispatch = useDispatch();
+
   // eslint-disable-next-line no-unused-vars
   const [checkedRanges, setCheckedRanges] = useState({
     price0to500CheckBox: false,
@@ -30,18 +34,11 @@ const PriceRangeCheckboxes = ({ setFilters }) => {
         .map((key) => priceRanges[key]);
 
       if (activeRanges.length === 0) {
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          priceRange: [0, Infinity],
-        }));
+        dispatch(setPriceRange([0, Infinity]));
       } else {
         const minPrice = Math.min(...activeRanges.map((range) => range[0]));
         const maxPrice = Math.max(...activeRanges.map((range) => range[1]));
-
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          priceRange: [minPrice, maxPrice],
-        }));
+        dispatch(setPriceRange([minPrice, maxPrice]));
       }
 
       return newCheckedRanges;

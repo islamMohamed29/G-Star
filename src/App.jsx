@@ -1,19 +1,20 @@
-import { Fragment, useEffect } from "react";
-import "./App.css";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import "./App.css";
 import Layout from "./Pages/Layout";
-import NotFound from "./Pages/NotFound";
-import Home from "./Pages/Home";
-import Shop from "./Pages/Shop";
-import ProductDetails from "./Pages/ProductDetails";
+import LayoutWithoutFooter from "./Pages/LayoutWithoutFooter.jsx";
 import ProtectedRoute from "./components/helpers/ProtectedRoute.jsx";
 import ScrollToTop from "./components/helpers/ScrollToTop.jsx";
-import { element } from "prop-types";
-import CheckOut from "./Pages/CheckOut.jsx";
-import LayoutWithoutFooter from "./Pages/LayoutWithoutFooter.jsx";
+import { MainLoading } from "./components/Loading/MainLoading.jsx";
 
+const Home = lazy(() => import("./Pages/Home"));
+const Shop = lazy(() => import("./Pages/Shop"));
+const Login = lazy(() => import("./components/Auth/Login"));
+const Register = lazy(() => import("./components/Auth/Register"));
+const ProductDetails = lazy(() => import("./Pages/ProductDetails"));
+const NotFound = lazy(() => import("./Pages/NotFound"));
+const CheckOut = lazy(() => import("./Pages/CheckOut"));
+const SearchPage = lazy(() => import("./components/Search/SearchPage"));
 function App() {
   const routes = [
     {
@@ -22,6 +23,7 @@ function App() {
       children: [
         { path: "", element: <Home /> },
         { path: "shop", element: <Shop /> },
+        { path: "search", element: <SearchPage /> },
         {
           path: "login",
           element: (
@@ -52,8 +54,8 @@ function App() {
   return (
     <>
       <Router>
-        <Fragment>
-          <ScrollToTop />
+        <ScrollToTop />
+        <Suspense fallback={<MainLoading />}>
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.element}>
@@ -68,7 +70,7 @@ function App() {
               </Route>
             ))}
           </Routes>
-        </Fragment>
+        </Suspense>
       </Router>
     </>
   );

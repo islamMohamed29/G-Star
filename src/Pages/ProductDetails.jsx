@@ -19,10 +19,10 @@ export default function ProductDetails() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColorImage, setSelectedColorImage] = useState(null);
-  const [lowStockMessage, setLowStockMessage] = useState(""); // حالة لتخزين الرسالة
+  const [lowStockMessage, setLowStockMessage] = useState("");
 
   const [selectedSize, setSelectedSize] = useState(null);
-  const cartData = useSelector((state) => state.cart.cartItems); // الحصول على العناصر الحالية في سلة التسوق
+  const cartData = useSelector((state) => state.cart.cartItems);
   console.log(cartData, "cartData");
   const isOpen = useSelector((state) => state.layout.navOpen);
   let currentLanguage = localStorage.getItem("language")
@@ -54,7 +54,7 @@ export default function ProductDetails() {
       const initialImages = foundProduct.gallery[initialColor] || [];
       setGalleryImages(initialImages);
       setSelectedImage(initialImages[0]?.large || "");
-      setSelectedColorImage(foundProduct.colorPanel[0]?.image);
+      setSelectedColorImage(foundProduct.colorPanel[0]?.colorImage);
     }
   }, [id]);
 
@@ -170,17 +170,20 @@ export default function ProductDetails() {
                           product.colorPanel.map((color, index) => (
                             <li
                               className={
-                                color.image === selectedColorImage
+                                color.colorImage === selectedColorImage
                                   ? "selected-color"
                                   : ""
                               }
                               key={index}
                             >
                               <img
-                                src={color.image}
+                                src={color.colorImage}
                                 alt={color.color}
                                 onClick={() =>
-                                  handleColorChange(color.color, color.image)
+                                  handleColorChange(
+                                    color.color,
+                                    color.colorImage
+                                  )
                                 }
                               />
                             </li>

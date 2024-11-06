@@ -2,13 +2,17 @@ export default [
   {
     id: 1,
     name: "Nifous T-Shirt",
-    mainImage: "/product_2/g-star-nifous-t-shirt-red-main.jpg",
+    mainImage: {
+      color: "rusty red gd",
+      image: "/product_2/g-star-nifous-t-shirt-red-main.jpg",
+    },
     hoverImage: "/product_2/g-star-nifous-t-shirt-red-hover.jpg",
     alt: "Distressed Logo T-Shirt",
     price: 39.95,
     brand: "Outfits",
-    category: "T-Shirts",
+    category: "T_Shirts",
     gender: "men",
+    colors: ["White", "Red"],
     images: {
       beg: "color-1.jpg",
       rose: "color-2.jpg",
@@ -54,7 +58,8 @@ export default [
     colorPanel: [
       {
         color: "dark black garment dyed",
-        image: "/product_2/g-star-raw-nifous-t-shirt-black.jpg",
+        thumbnail: "/product_2/g-star-raw-nifous-t-shirt-black.jpg",
+        colorImage: "/product_2/g-star-nifous-t-shirt-black-mainDarkBlack.jpg",
         stockBySize: {
           XXS: 100,
           XS: 500,
@@ -67,7 +72,9 @@ export default [
       },
       {
         color: "shadow olive",
-        image: "/product_2/g-star-raw-nifous-t-shirt-green.jpg",
+        thumbnail: "/product_2/g-star-raw-nifous-t-shirt-green.jpg",
+        colorImage:
+          "/product_2/g-star-nifous-t-shirt-green-shadowOliveMain.jpg",
         stockBySize: {
           XXS: 5,
           XS: 10,
@@ -80,7 +87,8 @@ export default [
       },
       {
         color: "rusty red gd",
-        image: "/product_2/g-star-raw-nifous-t-shirt-red.jpg",
+        thumbnail: "/product_2/g-star-raw-nifous-t-shirt-red.jpg",
+        colorImage: "/product_2/g-star-nifous-t-shirt-red-rustyRedMain.jpg",
         stockBySize: {
           XXS: 5,
           XS: 10,
@@ -93,7 +101,8 @@ export default [
       },
       {
         color: "white",
-        image: "/product_2/g-star-raw-nifous-t-shirt-white.jpg",
+        thumbnail: "/product_2/g-star-raw-nifous-t-shirt-white.jpg",
+        colorImage: "/product_2/g-star-nifous-t-shirt-white-whiteMain.jpg",
         stockBySize: {
           XXS: 5,
           XS: 10,
@@ -106,7 +115,8 @@ export default [
       },
       {
         color: "imperial blue",
-        image: "/product_2/g-star-raw-nifous-t-shirt-dark-blue.jpg",
+        thumbnail: "/product_2/g-star-raw-nifous-t-shirt-dark-blue.jpg",
+        colorImage: "/product_2/g-star-nifous-t-shirt-medium-blue (1).jpg",
         stockBySize: {
           XXS: 5,
           XS: 10,
@@ -123,19 +133,17 @@ export default [
   {
     id: 2,
     name: "Nifous Zip Thru Sweater",
-    mainImage: "/product_1/g-star-nifous-zip-thru-sweater-green (9).jpg",
+    mainImage: {
+      color: "shadow olive",
+      image: "/product_1/g-star-nifous-zip-thru-sweater-green (9).jpg",
+    },
     hoverImage: "/product_1/g-star-nifous-zip-thru-sweater-green.jpg",
     alt: "Distressed Logo T-Shirt",
     price: 99.95,
     brand: "Outfits",
+    colors: ["Green"],
     category: "Sweats",
     gender: "men",
-    images: {
-      beg: "color-1.jpg",
-      rose: "color-2.jpg",
-      black: "color-3.jpg",
-      gray: "color-4.jpg",
-    },
     gallery: {
       "shadow olive": [
         {
@@ -163,7 +171,8 @@ export default [
     colorPanel: [
       {
         color: "shadow olive",
-        image: "/product_1/g-star-nifous-zip-thru-sweater-green (40).jpg",
+        thumbnail: "/product_1/g-star-nifous-zip-thru-sweater-green (40).jpg",
+        colorImage: "/product_1/g-star-nifous-zip-thru-sweater-green (40).jpg",
         stockBySize: {
           XXS: 0,
           XS: 0,
