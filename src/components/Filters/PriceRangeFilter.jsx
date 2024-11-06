@@ -6,13 +6,6 @@ import { setPriceRange } from "../../redux/slices/filter-slice";
 const PriceRangeCheckboxes = () => {
   const dispatch = useDispatch();
 
-  // eslint-disable-next-line no-unused-vars
-  const [checkedRanges, setCheckedRanges] = useState({
-    price0to500CheckBox: false,
-    price500to1000CheckBox: false,
-    price1000to2500CheckBox: false,
-    price2500orMoreCheckBox: false,
-  });
   const priceRanges = {
     price0to500CheckBox: [0, 500],
     price500to1000CheckBox: [500, 1000],

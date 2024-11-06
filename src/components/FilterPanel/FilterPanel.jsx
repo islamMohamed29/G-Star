@@ -47,9 +47,11 @@ const FilterPanel = () => {
     <>
       <PriceRangeFilter />
       <ColorFilter />
-      {/* 
       <GenderFilter />
       <SizeFilter />
+      {/* 
+     
+    
       <LengthFilter />
       <CategoryFilter />
       <FitFilter /> */}

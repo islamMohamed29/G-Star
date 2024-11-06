@@ -76,8 +76,8 @@ export default [
         colorImage:
           "/product_2/g-star-nifous-t-shirt-green-shadowOliveMain.jpg",
         stockBySize: {
-          XXS: 5,
-          XS: 10,
+          34: 5,
+          xLargeCheckBox: 10,
           S: 0,
           M: 20,
           L: 15,

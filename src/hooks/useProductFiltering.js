@@ -40,8 +40,20 @@ export const useProductFiltering = (initialProducts) => {
               key === "category"
             ) {
               if (key === "sizes") {
+                // filtered = filtered.filter((product) =>
+                //   filters[key].some((size) => product.sizes?.includes(size))
+                // );
                 filtered = filtered.filter((product) =>
-                  filters[key].some((size) => product.sizes?.includes(size))
+                  filters[key].some((size) => {
+                    // التحقق من وجود المقاس في أي من الـ colorPanels
+                    return product.colorPanel?.some((panel) =>
+                      panel.sizes?.some(
+                        (panelSize) =>
+                          // مقارنة المقاس مع تجاهل حالة الأحرف
+                          panelSize.toLowerCase() === size.toLowerCase()
+                      )
+                    );
+                  })
                 );
               }
               if (key === "lengths") {

@@ -1,26 +1,51 @@
-import PropTypes from "prop-types";
-// eslint-disable-next-line no-unused-vars
-const SizeFilter = ({ setFilters }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setSizes } from "../../redux/slices/filter-slice";
+
+const SizeFilter = () => {
+  const dispatch = useDispatch();
+  const selectedSizes = useSelector((state) => state.filters.sizes);
+
   const handleCheckBoxChange = (event) => {
     const { name, checked } = event.target;
 
-    setFilters((prevFilters) => {
-      let updatedSizeFilters;
+    let updatedSizeFilters;
+    if (checked) {
+      updatedSizeFilters = selectedSizes.includes(name)
+        ? selectedSizes
+        : [...selectedSizes, name];
+    } else {
+      updatedSizeFilters = selectedSizes.filter((size) => size !== name);
+    }
 
-      if (checked) {
-        updatedSizeFilters = prevFilters.sizes.includes(name)
-          ? prevFilters.sizes
-          : [...prevFilters.sizes, name];
-      } else {
-        updatedSizeFilters = prevFilters.sizes.filter((size) => size !== name);
-      }
-
-      return {
-        ...prevFilters,
-        sizes: updatedSizeFilters,
-      };
-    });
+    dispatch(setSizes(updatedSizeFilters));
   };
+  const sizes = [
+    // المقاسات الرقمية
+    { name: "28", label: "28" },
+    { name: "29", label: "29" },
+    { name: "30", label: "30" },
+    { name: "31", label: "31" },
+    { name: "32", label: "32" },
+    { name: "33", label: "33" },
+    { name: "34", label: "34" },
+    { name: "36", label: "36" },
+    { name: "38", label: "38" },
+    { name: "40", label: "40" },
+    { name: "41", label: "41" },
+    { name: "42", label: "42" },
+    { name: "43", label: "43" },
+    { name: "44", label: "44" },
+    // المقاسات النصية
+    { name: "xxxSmallCheckBox", label: "XXXS" },
+    { name: "xxSmallCheckBox", label: "XXS" },
+    { name: "xSmallCheckBox", label: "XS" },
+    { name: "smallCheckBox", label: "S" },
+    { name: "mediumCheckBox", label: "M" },
+    { name: "largeCheckBox", label: "L" },
+    { name: "xLargeCheckBox", label: "XL" },
+    { name: "xxLargeCheckBox", label: "XXL" },
+    { name: "oneSizeCheckBox", label: "one size" },
+  ];
 
   return (
     <div className="by-size">
@@ -33,242 +58,24 @@ const SizeFilter = ({ setFilters }) => {
         Size
       </button>
       <ul className="dropdown-menu parentFilterPanel">
-        <li>
-          <input
-            type="checkbox"
-            name="28"
-            id="size28CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size28CheckBox">28</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="29"
-            id="size29CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size29CheckBox">29</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="30"
-            id="size30CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size30CheckBox">30</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="31"
-            id="size31CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size31CheckBox">31</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="32"
-            id="size32CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size32CheckBox">32</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="33"
-            id="size33CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size33CheckBox">33</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="34"
-            id="size34CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size34CheckBox">34</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="36"
-            id="size36CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size36CheckBox">36</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="38"
-            id="size38CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size38CheckBox">38</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="40"
-            id="size40CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size40CheckBox">40</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="41"
-            id="size41CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size41CheckBox">41</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="42"
-            id="size42CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size42CheckBox">42</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="43"
-            id="size43CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size43CheckBox">43</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="44"
-            id="size44CheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="size44CheckBox">44</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="xxxSmallCheckBox"
-            id="xxxSmallCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="xxxSmallCheckBox">XXXS</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="xxSmallCheckBox"
-            id="xxSmallCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="xxSmallCheckBox">XXS</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="xSmallCheckBox"
-            id="xSmallCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="xSmallCheckBox">XS</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="smallCheckBox"
-            id="smallCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="smallCheckBox">S</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="mediumCheckBox"
-            id="mediumCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="mediumCheckBox">M</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="largeCheckBox"
-            id="largeCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="largeCheckBox">L</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="xLargeCheckBox"
-            id="xLargeCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="xLargeCheckBox">XL</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="xxLargeCheckBox"
-            id="xxLargeCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="xxLargeCheckBox">XXL</label>
-        </li>
-        <li>
-          <input
-            type="checkbox"
-            name="oneSizeCheckBox"
-            id="oneSizeCheckBox"
-            className="filterCheckBox"
-            onChange={handleCheckBoxChange}
-          />
-          <label htmlFor="oneSizeCheckBox">one size</label>
-        </li>
+        {sizes.map(({ name, label }) => {
+          return (
+            <li key={name}>
+              <input
+                type="checkbox"
+                name={name}
+                id={`size${name}CheckBox`}
+                className="filterCheckBox"
+                onChange={handleCheckBoxChange}
+                checked={selectedSizes.includes(name)}
+              />
+              <label htmlFor={`size${name}CheckBox`}>{label}</label>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 };
 
-SizeFilter.propTypes = {
-  setFilters: PropTypes.func.isRequired,
-};
 export default SizeFilter;

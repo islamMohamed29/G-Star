@@ -1,29 +1,25 @@
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setGender } from "../../redux/slices/filter-slice";
 
 const GenderFilter = ({ setFilters }) => {
+  const dispatch = useDispatch();
+  const selectedGenders = useSelector((state) => state.filters.gender);
+
   const handleCheckBoxChange = (event) => {
     const { name, checked } = event.target;
-    setFilters((prevFilters) => {
-      let updatedGenderFilters;
 
-      if (checked) {
-        console.log(checked, "checkd");
-        updatedGenderFilters = prevFilters.gender.includes(name)
-          ? prevFilters.gender
-          : [...prevFilters.gender, name];
+    let updatedGenderFilters;
+    if (checked) {
+      updatedGenderFilters = selectedGenders.includes(name)
+        ? selectedGenders
+        : [...selectedGenders, name];
+    } else {
+      updatedGenderFilters = selectedGenders.filter(
+        (gender) => gender !== name
+      );
+    }
 
-        console.log(updatedGenderFilters, "updatedGenderFilters");
-      } else {
-        updatedGenderFilters = prevFilters.gender.filter(
-          (gender) => gender !== name
-        );
-      }
-
-      return {
-        ...prevFilters,
-        gender: updatedGenderFilters,
-      };
-    });
+    dispatch(setGender(updatedGenderFilters));
   };
 
   return (
@@ -66,7 +62,5 @@ const GenderFilter = ({ setFilters }) => {
     </div>
   );
 };
-GenderFilter.propTypes = {
-  setFilters: PropTypes.func.isRequired,
-};
+
 export default GenderFilter;
