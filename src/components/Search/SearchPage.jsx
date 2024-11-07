@@ -24,35 +24,35 @@ export default function SearchPage() {
     : [];
 
   return (
-    <main className="search_page">
-      <div className={`custom-container ${isOpen ? "nav-open" : ""}`}>
-        <TopBar />
-        <div className="result_search">
-          <p>{`${productsWithColors.length} Result For ${searchQuery}`}</p>
+    <>
+      <main className="search_page">
+        <div className={`custom-container ${isOpen ? "nav-open" : ""}`}>
+          <TopBar />
+          <div className="result_search">
+            <p>{`${productsWithColors.length} Result For ${searchQuery}`}</p>
+          </div>
+        </div>
+      </main>
+      <div>
+        <h1>Hello Eslam</h1>
+        <h2>{`${productsWithColors.length} Results For ${searchQuery}`}</h2>
+        <div className="products-grid">
+          {productsWithColors.map((product) => (
+            <div
+              key={`${product.id}-${product.mainImage.color}`}
+              className="product-card"
+            >
+              <img
+                src={product.mainImage.image}
+                alt={`${product.name} - ${product.mainImage.color}`}
+              />
+              <h3>
+                {product.name} - {product.mainImage.color}
+              </h3>
+            </div>
+          ))}
         </div>
       </div>
-    </main>
-    // <div>
-    //   <h1>Hello Eslam</h1>
-    //   <h2>
-    //     {productsWithColors.length} Results For "{searchQuery}"
-    //   </h2>
-    //   <div className="products-grid">
-    //     {productsWithColors.map((product) => (
-    //       <div
-    //         key={`${product.id}-${product.mainImage.color}`}
-    //         className="product-card"
-    //       >
-    //         <img
-    //           src={product.mainImage.image}
-    //           alt={`${product.name} - ${product.mainImage.color}`}
-    //         />
-    //         <h3>
-    //           {product.name} - {product.mainImage.color}
-    //         </h3>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
+    </>
   );
 }

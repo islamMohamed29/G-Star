@@ -1,10 +1,5 @@
-// services/paymobService.js
 export class PayMobService {
   constructor() {
-    // this.apiKey = process.env.REACT_APP_PAYMOB_API_KEY;
-    // this.baseUrl = "https://accept.paymob.com/api";
-    // this.integrationId = process.env.REACT_APP_PAYMOB_INTEGRATION_ID;
-    // this.frameId = process.env.REACT_APP_PAYMOB_IFRAME_ID;
     this.apiKey = import.meta.env.VITE_PAYMOB_API_KEY;
     this.baseUrl = "https://accept.paymob.com/api";
     this.integrationId = import.meta.env.VITE_PAYMOB_INTEGRATION_ID;

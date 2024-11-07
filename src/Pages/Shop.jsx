@@ -68,7 +68,7 @@ export default function Shop() {
           <div className="products">
             <div className="container">
               <div className="row">
-                {productsWithColors.map((product, index) => (
+                {filteredProducts.map((product, index) => (
                   <Product key={index} product={product} />
                 ))}
               </div>

@@ -28,10 +28,11 @@ export const useProductFiltering = (initialProducts) => {
           if (filters[key].length > 0) {
             if (key === "colors") {
               filtered = filtered.filter((product) =>
-                filters[key].some((color) =>
-                  product.colors
-                    ?.map((c) => c.toLowerCase())
-                    .includes(color.toLowerCase())
+                filters[key].some((filterColor) =>
+                  product.colors.some(
+                    (productColor) =>
+                      productColor.toLowerCase() === filterColor.toLowerCase()
+                  )
                 )
               );
             } else if (
@@ -40,21 +41,28 @@ export const useProductFiltering = (initialProducts) => {
               key === "category"
             ) {
               if (key === "sizes") {
-                // filtered = filtered.filter((product) =>
-                //   filters[key].some((size) => product.sizes?.includes(size))
-                // );
-                filtered = filtered.filter((product) =>
-                  filters[key].some((size) => {
-                    // التحقق من وجود المقاس في أي من الـ colorPanels
-                    return product.colorPanel?.some((panel) =>
-                      panel.sizes?.some(
-                        (panelSize) =>
-                          // مقارنة المقاس مع تجاهل حالة الأحرف
-                          panelSize.toLowerCase() === size.toLowerCase()
-                      )
-                    );
-                  })
-                );
+                // filtered = filtered.filter((product) => {
+                //   return product.colorPanel.some((colorVariant) => {
+                //     return filters.sizes.some((selectedSize) => {
+                //       const sizeKey = convertSizeFormat(selectedSize);
+                //       return colorVariant.stockBySize[sizeKey] > 0;
+                //     });
+                //   });
+                // });
+                filtered = filtered.filter((product) => {
+                  return product.colorPanel.some((colorVariant) => {
+                    return filters.sizes.some((selectedSize) => {
+                      const sizeKey = convertSizeFormat(selectedSize);
+
+                      return (
+                        Object.prototype.hasOwnProperty.call(
+                          colorVariant.stockBySize,
+                          sizeKey
+                        ) && colorVariant.stockBySize[sizeKey] > 0
+                      );
+                    });
+                  });
+                });
               }
               if (key === "lengths") {
                 filtered = filtered.filter((product) =>
@@ -93,3 +101,26 @@ export const useProductFiltering = (initialProducts) => {
 
   return { filteredProducts, loading };
 };
+
+function convertSizeFormat(size) {
+  const sizeMap = {
+    xxxSmallCheckBox: "XXXS",
+    xxSmallCheckBox: "XXS",
+    xSmallCheckBox: "XS",
+    smallCheckBox: "S",
+    mediumCheckBox: "M",
+    largeCheckBox: "L",
+    xLargeCheckBox: "XL",
+    xxLargeCheckBox: "XXL",
+    oneSizeCheckBox: "ONE_SIZE",
+    29: "29",
+    30: "30",
+    31: "31",
+    32: "32",
+    33: "33",
+    34: "34",
+    36: "36",
+  };
+
+  return sizeMap[size] || size;
+}

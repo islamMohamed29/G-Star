@@ -7,21 +7,25 @@ const SizeFilter = () => {
 
   const handleCheckBoxChange = (event) => {
     const { name, checked } = event.target;
+    let updatedSizes;
 
-    let updatedSizeFilters;
     if (checked) {
-      updatedSizeFilters = selectedSizes.includes(name)
-        ? selectedSizes
-        : [...selectedSizes, name];
+      updatedSizes = [...selectedSizes, name];
     } else {
-      updatedSizeFilters = selectedSizes.filter((size) => size !== name);
+      updatedSizes = selectedSizes.filter((size) => size !== name);
     }
 
-    dispatch(setSizes(updatedSizeFilters));
+    dispatch(setSizes(updatedSizes));
   };
+
   const sizes = [
-    // المقاسات الرقمية
-    { name: "28", label: "28" },
+    { name: "XXS", label: "XXS" },
+    { name: "XS", label: "XS" },
+    { name: "S", label: "S" },
+    { name: "M", label: "M" },
+    { name: "L", label: "L" },
+    { name: "XL", label: "XL" },
+    { name: "XXL", label: "XXL" },
     { name: "29", label: "29" },
     { name: "30", label: "30" },
     { name: "31", label: "31" },
@@ -29,22 +33,6 @@ const SizeFilter = () => {
     { name: "33", label: "33" },
     { name: "34", label: "34" },
     { name: "36", label: "36" },
-    { name: "38", label: "38" },
-    { name: "40", label: "40" },
-    { name: "41", label: "41" },
-    { name: "42", label: "42" },
-    { name: "43", label: "43" },
-    { name: "44", label: "44" },
-    // المقاسات النصية
-    { name: "xxxSmallCheckBox", label: "XXXS" },
-    { name: "xxSmallCheckBox", label: "XXS" },
-    { name: "xSmallCheckBox", label: "XS" },
-    { name: "smallCheckBox", label: "S" },
-    { name: "mediumCheckBox", label: "M" },
-    { name: "largeCheckBox", label: "L" },
-    { name: "xLargeCheckBox", label: "XL" },
-    { name: "xxLargeCheckBox", label: "XXL" },
-    { name: "oneSizeCheckBox", label: "one size" },
   ];
 
   return (
@@ -58,21 +46,19 @@ const SizeFilter = () => {
         Size
       </button>
       <ul className="dropdown-menu parentFilterPanel">
-        {sizes.map(({ name, label }) => {
-          return (
-            <li key={name}>
-              <input
-                type="checkbox"
-                name={name}
-                id={`size${name}CheckBox`}
-                className="filterCheckBox"
-                onChange={handleCheckBoxChange}
-                checked={selectedSizes.includes(name)}
-              />
-              <label htmlFor={`size${name}CheckBox`}>{label}</label>
-            </li>
-          );
-        })}
+        {sizes.map(({ name, label }) => (
+          <li key={name}>
+            <input
+              type="checkbox"
+              name={name}
+              id={`size${name}CheckBox`}
+              className="filterCheckBox"
+              onChange={handleCheckBoxChange}
+              checked={selectedSizes.includes(name)}
+            />
+            <label htmlFor={`size${name}CheckBox`}>{label}</label>
+          </li>
+        ))}
       </ul>
     </div>
   );
