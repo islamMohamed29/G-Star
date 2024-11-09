@@ -1,5 +1,6 @@
 input {
-  &.filterCheckBox {
+  &.filterCheckBox,
+  &.filterRadioBox {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -19,6 +20,9 @@ input {
         text-decoration: line-through;
       }
     }
+  }
+  &.filterRadioBox {
+    border-radius: 50%;
   }
 }
 

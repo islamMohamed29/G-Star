@@ -32,7 +32,7 @@ const RecentlyViewed = () => {
   return (
     <section className="products_wrapper">
       <div className="products">
-        <div className="container  pt-4 ">
+        <div className="container-fluid ">
           <div className="special-head pb-2 ">
             <h2>Recently Viewed</h2>
           </div>

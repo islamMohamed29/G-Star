@@ -1,15 +1,9 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setColors } from "../../redux/slices/filter-slice";
 
 const ColorFilter = () => {
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters);
-
-  useEffect(() => {
-    console.log(filters, "filters");
-  }, [filters]);
 
   const [checkedColors, setCheckedColors] = useState({
     metalCheckBox: false,

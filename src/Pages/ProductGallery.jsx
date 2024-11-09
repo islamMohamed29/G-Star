@@ -7,14 +7,17 @@ import ImageWithLoader from "../components/Loading/ImageWithLoader";
 const ProductGallery = ({ images, selectedImage }) => {
   const [currentImage, setCurrentImage] = useState(selectedImage);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [showCursor, setShowCursor] = useState(false);
 
   const handleMouseMove = (e) => {
-    if (!isZoomed) return;
+    // if (!isZoomed) return;
 
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
     e.target.style.transformOrigin = `${x}% ${y}%`;
+    setCursorPosition({ x: e.clientX, y: e.clientY });
   };
 
   useEffect(() => {
@@ -24,7 +27,13 @@ const ProductGallery = ({ images, selectedImage }) => {
   const handleClick = () => {
     setIsZoomed(!isZoomed);
   };
+  const handleMouseEnter = () => {
+    setShowCursor(true);
+  };
 
+  const handleMouseLeave = () => {
+    setShowCursor(false);
+  };
   return (
     <div className="product-gallery">
       <div className="main-image-container">
@@ -34,15 +43,20 @@ const ProductGallery = ({ images, selectedImage }) => {
           className={`main-image ${isZoomed ? "zoomed" : ""}`}
           onMouseMove={handleMouseMove}
           onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         />
-        {/* <ImageWithLoader
-          src={currentImage}
-          alt={"Product"}
-          isZoomed={isZoomed} 
-          handleMouseMove={handleMouseMove}
-          handleClick={handleClick}
-          // className={`main-image ${isZoomed ? "zoomed" : ""}`}
-        /> */}
+        {showCursor && (
+          <div
+            className="custom-cursor"
+            style={{
+              top: cursorPosition.y,
+              left: cursorPosition.x,
+            }}
+          >
+            <i className={`fa-solid ${isZoomed ? "fa-minus" : "fa-plus"}`}></i>
+          </div>
+        )}
       </div>
       <div className="thumbnails">
         {images.map((image, index) => (

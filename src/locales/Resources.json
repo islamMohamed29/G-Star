@@ -86,5 +86,17 @@
   "inclVat": {
     "en": "Incl. VAT",
     "ar": "يتضمن. الضريبة"
+  },
+  "addedToCart": {
+    "en": "Added to cart",
+    "ar": "تمت إضافة العنصر إلي السلة"
+  },
+  "freeShipping": {
+    "en": "Free shipping",
+    "ar": "شحن مجاني"
+  },
+  "60DayReturns": {
+    "en": "Free 60 day returns",
+    "ar": "إرجاع مجاني لمدة 60 يومًا"
   }
 }

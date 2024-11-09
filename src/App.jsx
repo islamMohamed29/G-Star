@@ -6,6 +6,7 @@ import LayoutWithoutFooter from "./Pages/LayoutWithoutFooter.jsx";
 import ProtectedRoute from "./components/helpers/ProtectedRoute.jsx";
 import ScrollToTop from "./components/helpers/ScrollToTop.jsx";
 import { MainLoading } from "./components/Loading/MainLoading.jsx";
+import PaymentCallback from "./components/PaymentCallback.jsx";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Shop = lazy(() => import("./Pages/Shop"));
@@ -44,6 +45,10 @@ function App() {
         { path: "shop/product/:id", element: <ProductDetails /> },
         { path: "*", element: <NotFound /> },
       ],
+    },
+    {
+      path: "/payment-callback",
+      element: <PaymentCallback />,
     },
     {
       path: "/checkout",

@@ -8,6 +8,7 @@ const initialState = {
   fit: [],
   category: [],
   gender: [],
+  sortedBy: "Relevance",
 };
 
 const filterSlice = createSlice({
@@ -35,7 +36,11 @@ const filterSlice = createSlice({
     setGender: (state, action) => {
       state.gender = action.payload;
     },
+    setSorted: (state, action) => {
+      state.sortedBy = action.payload;
+    },
     resetFilters: (state) => {
+      console.log(initialState, "initialState");
       return initialState;
     },
   },
@@ -49,6 +54,7 @@ export const {
   setFit,
   setCategory,
   setGender,
+  setSorted,
   resetFilters,
 } = filterSlice.actions;
 

@@ -9,8 +9,8 @@ export default function TopBar(props) {
     <div className={`top_bar ${isDark && "is_dark"}`}>
       <ul>
         <li>{Resources["springUpdate"][currentLanguage]}</li>
-        <li>Free shipping</li>
-        <li>Free 60 day returns</li>
+        <li>{Resources["freeShipping"][currentLanguage]}</li>
+        <li>{Resources["60DayReturns"][currentLanguage]}</li>
       </ul>
     </div>
   );

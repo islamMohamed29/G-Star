@@ -11,7 +11,7 @@ export default function SearchBar() {
   const inputRef = useRef(null);
 
   const filteredProducts = useSelector(
-    (state) => state.search.filteredProducts || []
+    (state) => state.search.searchProducts || []
   );
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {

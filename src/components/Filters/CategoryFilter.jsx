@@ -1,26 +1,23 @@
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../../redux/slices/filter-slice";
 
-const CategoryFilter = ({ setFilters }) => {
+const CategoryFilter = () => {
+  let dispatch = useDispatch();
+  const selectedCategories = useSelector((state) => state.filters.category);
   const handleCheckBoxChange = (event) => {
     const { name, checked } = event.target;
-    setFilters((prevFilters) => {
-      let updatedCategoryFilters;
 
-      if (checked) {
-        updatedCategoryFilters = prevFilters.category.includes(name)
-          ? prevFilters.category
-          : [...prevFilters.category, name];
-      } else {
-        updatedCategoryFilters = prevFilters.category.filter(
-          (length) => length !== name
-        );
-      }
-
-      return {
-        ...prevFilters,
-        category: updatedCategoryFilters,
-      };
-    });
+    let updatedCategoryFilters;
+    if (checked) {
+      updatedCategoryFilters = selectedCategories.includes(name)
+        ? selectedCategories
+        : [...selectedCategories, name];
+    } else {
+      updatedCategoryFilters = selectedCategories.filter(
+        (category) => category !== name
+      );
+    }
+    dispatch(setCategory(updatedCategoryFilters));
   };
   return (
     <div className="by-category">
@@ -189,7 +186,4 @@ const CategoryFilter = ({ setFilters }) => {
   );
 };
 
-CategoryFilter.propTypes = {
-  setFilters: PropTypes.func.isRequired,
-};
 export default CategoryFilter;

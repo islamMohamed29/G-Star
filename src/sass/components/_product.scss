@@ -1,7 +1,15 @@
+section.products_wrapper {
+  padding: 80px 0;
+  .row {
+    row-gap: 50px;
+  }
+}
+
 .products .product {
   position: relative;
   cursor: pointer;
-  height: 340px;
+  // height: 340px;
+  height: 400px;
   &:hover {
     .main-image {
       z-index: -1;

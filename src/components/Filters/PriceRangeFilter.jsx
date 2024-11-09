@@ -1,10 +1,15 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setPriceRange } from "../../redux/slices/filter-slice";
 
 const PriceRangeCheckboxes = () => {
   const dispatch = useDispatch();
+  const [checkedRanges, setCheckedRanges] = useState({
+    price0to500CheckBox: false,
+    price500to1000CheckBox: false,
+    price1000to2500CheckBox: false,
+    price2500orMoreCheckBox: false,
+  });
 
   const priceRanges = {
     price0to500CheckBox: [0, 500],
@@ -55,6 +60,7 @@ const PriceRangeCheckboxes = () => {
             name="price0to500CheckBox"
             id="price0to500CheckBox"
             className="filterCheckBox"
+            checked={checkedRanges.price0to500CheckBox}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="price0to500CheckBox">0-500 €</label>
@@ -65,6 +71,7 @@ const PriceRangeCheckboxes = () => {
             name="price500to1000CheckBox"
             id="price500to1000CheckBox"
             className="filterCheckBox"
+            checked={checkedRanges.price500to1000CheckBox}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="price500to1000CheckBox">500-1000 €</label>
@@ -75,6 +82,7 @@ const PriceRangeCheckboxes = () => {
             name="price1000to2500CheckBox"
             id="price1000to2500CheckBox"
             className="filterCheckBox"
+            checked={checkedRanges.price1000to2500CheckBox}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="price1000to2500CheckBox">1000-2500 €</label>
@@ -85,6 +93,7 @@ const PriceRangeCheckboxes = () => {
             name="price2500orMoreCheckBox"
             id="price2500orMoreCheckBox"
             className="filterCheckBox"
+            checked={checkedRanges.price2500orMoreCheckBox}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="price2500orMoreCheckBox">2500 € or more</label>
@@ -92,10 +101,6 @@ const PriceRangeCheckboxes = () => {
       </ul>
     </div>
   );
-};
-
-PriceRangeCheckboxes.propTypes = {
-  setFilters: PropTypes.func.isRequired,
 };
 
 export default PriceRangeCheckboxes;

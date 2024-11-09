@@ -69,6 +69,7 @@ export default function CheckOut() {
         billingData
       );
 
+      console.log("payment Key", paymentKey);
       // Step 4: Redirect to Payment iframe
       const iframeUrl = `https://accept.paymob.com/api/acceptance/iframes/${paymobService.frameId}?payment_token=${paymentKey}`;
       window.location.href = iframeUrl;

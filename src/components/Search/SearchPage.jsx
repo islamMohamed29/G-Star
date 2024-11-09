@@ -1,15 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import TopBar from "../TopBar";
+import FilterPanel from "../FilterPanel/FilterPanel";
+import Product from "../Shop/Product";
+import { useProductFiltering } from "../../hooks/useProductFiltering";
+import { resetFilters } from "../../redux/slices/filter-slice";
 
 export default function SearchPage() {
-  const { searchQuery, filteredProducts } = useSelector(
-    (state) => state.search
-  );
-
   const isOpen = useSelector((state) => state.layout.navOpen);
-  const getProductsWithColors = (filteredProducts) => {
-    return filteredProducts.flatMap((product) =>
+  const { searchQuery, searchProducts } = useSelector((state) => state.search);
+  const { filteredProducts, loading } = useProductFiltering(searchProducts);
+  const filters = useSelector((state) => state.filters);
+  let dispatch = useDispatch();
+  const getProductsWithColors = (finalProducts) => {
+    return finalProducts.flatMap((product) =>
       product.colorPanel.map((panel) => ({
         ...product,
         mainImage: {
@@ -23,6 +27,12 @@ export default function SearchPage() {
     ? getProductsWithColors(filteredProducts)
     : [];
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetFilters());
+    };
+  }, []);
+
   return (
     <>
       <main className="search_page">
@@ -31,28 +41,22 @@ export default function SearchPage() {
           <div className="result_search">
             <p>{`${productsWithColors.length} Result For ${searchQuery}`}</p>
           </div>
+
+          <FilterPanel filters={filters} />
+
+          <section className="products_wrapper">
+            <div className="products">
+              <div className="container-fluid">
+                <div className="row">
+                  {productsWithColors.map((product, index) => (
+                    <Product key={index} product={product} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
-      <div>
-        <h1>Hello Eslam</h1>
-        <h2>{`${productsWithColors.length} Results For ${searchQuery}`}</h2>
-        <div className="products-grid">
-          {productsWithColors.map((product) => (
-            <div
-              key={`${product.id}-${product.mainImage.color}`}
-              className="product-card"
-            >
-              <img
-                src={product.mainImage.image}
-                alt={`${product.name} - ${product.mainImage.color}`}
-              />
-              <h3>
-                {product.name} - {product.mainImage.color}
-              </h3>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 }

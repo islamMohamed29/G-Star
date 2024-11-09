@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import { notifySuccess } from "../../dependencies/Notification";
+import Resources from "../../locales/Resources.json";
 
+import { notifySuccess } from "../../dependencies/Notification";
+let currentLanguage = localStorage.getItem("language")
+  ? localStorage.getItem("language")
+  : "en";
 const initialState = {
   cartItems: JSON.parse(localStorage.getItem("cartData")) || [],
   searchTerm: "",
@@ -51,7 +54,7 @@ const cartSlice = createSlice({
         }
       } else {
         state.cartItems.push(action.payload);
-        notifySuccess("تمت إضافة العنصر إلى السلة");
+        notifySuccess(Resources["addedToCart"][currentLanguage]);
       }
 
       addToLocalStorage(state.cartItems);
@@ -111,6 +114,13 @@ const cartSlice = createSlice({
     calcTotalItems: (state) => {
       state.totalItems = calculateTotalItems(state.cartItems);
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+      state.subTotal = 0;
+      state.tax = 0;
+      state.totalAmount = 0;
+      state.totalItems = 0;
+    },
   },
 });
 
@@ -120,6 +130,7 @@ export const {
   updateQuantity,
   updateTotalAmount,
   calcTotalItems,
+  clearCart,
   // removeItem,
   // decreaseQuantity,
   // checkLocalStorage,

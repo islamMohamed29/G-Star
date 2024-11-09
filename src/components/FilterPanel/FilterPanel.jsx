@@ -1,69 +1,36 @@
-// import PropTypes from "prop-types";
-// import PriceRangeFilter from "../Filters/PriceRangeFilter";
-// import ColorFilter from "../Filters/ColorFilter";
-// import GenderFilter from "../Filters/GenderFilter";
-// import SizeFilter from "../Filters/SizeFilter";
-// import LengthFilter from "../Filters/LengthFilter";
-// import CategoryFilter from "../Filters/CategoryFilter";
-// import FitFilter from "../Filters/FitFilter";
-
-// // eslint-disable-next-line no-unused-vars
-// const FilterPanel = ({ filters, setFilters }) => {
-//   return (
-//     <>
-//       <PriceRangeFilter setFilters={setFilters} />
-//       <ColorFilter setFilters={setFilters} />
-//       <GenderFilter setFilters={setFilters} />
-//       <SizeFilter setFilters={setFilters} />
-//       <LengthFilter setFilters={setFilters} />
-//       <CategoryFilter setFilters={setFilters} />
-//       <FitFilter setFilters={setFilters} />
-//     </>
-//   );
-// };
-
-// FilterPanel.propTypes = {
-//   filters: PropTypes.shape({
-//     priceRange: PropTypes.arrayOf(PropTypes.number).isRequired,
-//   }).isRequired,
-//   setFilters: PropTypes.func.isRequired,
-// };
-
-// export default FilterPanel;
-
-import PropTypes from "prop-types";
 import PriceRangeFilter from "../Filters/PriceRangeFilter";
 import ColorFilter from "../Filters/ColorFilter";
 import GenderFilter from "../Filters/GenderFilter";
 import SizeFilter from "../Filters/SizeFilter";
 import LengthFilter from "../Filters/LengthFilter";
 import CategoryFilter from "../Filters/CategoryFilter";
-import FitFilter from "../Filters/FitFilter";
-import { useSelector } from "react-redux";
 
-// eslint-disable-next-line no-unused-vars
+import { useSelector } from "react-redux";
+import SortDropdown from "../Filters/SortDropdown";
+
 const FilterPanel = () => {
+  const categoryFilters = useSelector((state) => state.filters.category);
+  let isLengthShow =
+    (categoryFilters.includes("sweats") &&
+      !categoryFilters.includes("jeans")) ||
+    (categoryFilters.includes("t_Shirts") &&
+      !categoryFilters.includes("jeans"));
+
   return (
     <>
-      <PriceRangeFilter />
-      <ColorFilter />
-      <GenderFilter />
-      <SizeFilter />
-      {/* 
-     
-    
-      <LengthFilter />
-      <CategoryFilter />
-      <FitFilter /> */}
+      <div className="head-filter-section">
+        <div className="filter">
+          <PriceRangeFilter />
+          <ColorFilter />
+          <GenderFilter />
+          <SizeFilter />
+          <CategoryFilter />
+          {!isLengthShow && <LengthFilter />}
+        </div>
+        <SortDropdown />
+      </div>
     </>
   );
-};
-
-FilterPanel.propTypes = {
-  filters: PropTypes.shape({
-    priceRange: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
-  setFilters: PropTypes.func.isRequired,
 };
 
 export default FilterPanel;

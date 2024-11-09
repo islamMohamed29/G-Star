@@ -9,20 +9,6 @@ export default function Shop() {
   const { filteredProducts, loading } = useProductFiltering(products);
   const isOpen = useSelector((state) => state.layout.navOpen);
   const filters = useSelector((state) => state.filters);
-  const getProductWithColors = (filteredProducts) => {
-    return filteredProducts.flatMap((product) =>
-      product.colorPanel.map((panel) => ({
-        ...product,
-        mainImage: {
-          color: panel.color,
-          image: panel.colorImage,
-        },
-      }))
-    );
-  };
-  const productsWithColors = filteredProducts
-    ? getProductWithColors(filteredProducts)
-    : [];
 
   return (
     <main className="shop-all">
@@ -45,7 +31,7 @@ export default function Shop() {
             <img decoding="async" alt="stay tuned htmlFor upcoming deals" />
           </picture>
           <div className="banner-content">
-            <h1>stay tuned htmlFor upcoming Deals</h1>
+            <h1>stay tuned for upcomming Deals</h1>
             <div>
               Our women sale may have ended, but you can still explore <br />
               our&nbsp;
@@ -59,14 +45,9 @@ export default function Shop() {
         </header>
 
         <section className="products_wrapper">
-          <div className="head-section">
-            <div className="filter">
-              <FilterPanel filters={filters} />
-            </div>
-            <div className="sort"></div>
-          </div>
+          <FilterPanel filters={filters} />
           <div className="products">
-            <div className="container">
+            <div className="container-fluid">
               <div className="row">
                 {filteredProducts.map((product, index) => (
                   <Product key={index} product={product} />

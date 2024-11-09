@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { navOpen } from "../../redux/slices/layout-slice";
 import Resources from "../../locales/Resources.json";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   calcTotalItems,
   removeItemCart,
@@ -108,7 +108,14 @@ export default function Navbar() {
             <div className="links">
               <ul>
                 <li>
-                  <Link to={"/shop"}>{Resources["shop"][currentLanguage]}</Link>
+                  <NavLink
+                    to="/shop"
+                    className={({ isActive }) =>
+                      isActive ? "active-link" : "navLink"
+                    }
+                  >
+                    {Resources["shop"][currentLanguage]}
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -136,12 +143,19 @@ export default function Navbar() {
               </select>
             </div>
             <div className="user">
-              <i className="fa-solid fa-user"></i>
-              <Link to="login">Login</Link>
+              <NavLink
+                to="login"
+                className={({ isActive }) =>
+                  isActive ? "active-link" : "navLink"
+                }
+              >
+                <i className="fa-solid fa-user me-2"></i>
+                Login
+              </NavLink>
             </div>
             <div className="whishlist">
-              <Link className="user_wishlist">
-                <Link className="wishlist_icon" to={"/wishlist"}>
+              <Link className={"user_wishlist"}>
+                <Link to={"/wishlist"} className="wishlist_icon">
                   <i className="fa-regular fa-heart"></i>
                 </Link>
                 <div className="wishlist_panel">
@@ -174,7 +188,7 @@ export default function Navbar() {
             </div>
             <div className="cart">
               <Link className="shopping-cart">
-                <Link className="cart_icon" to={"/checkout/shopping-bag"}>
+                <Link className={"cart_icon"} to={"/checkout/shopping-bag"}>
                   <i className="fa-solid fa-cart-shopping"></i>{" "}
                   <span>{totalCartItems >= 100 ? `99+` : totalCartItems}</span>
                 </Link>

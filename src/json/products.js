@@ -12,13 +12,19 @@ export default [
     brand: "Outfits",
     category: "T_Shirts",
     gender: "men",
+    category: ["t_Shirts", "sweats", "shirts"],
     colors: ["White", "Red"],
+    sales: 60,
+    discount: 10,
+    sale: false,
     images: {
       beg: "color-1.jpg",
       rose: "color-2.jpg",
       black: "color-3.jpg",
       gray: "color-4.jpg",
     },
+    createdData: "2022-06-22T15:45:00Z",
+
     gallery: {
       "dark black garment dyed": [
         {
@@ -142,8 +148,12 @@ export default [
     price: 99.95,
     brand: "Outfits",
     colors: ["White"],
-    category: "Sweats",
+    category: ["t_Shirts", "sweats", "shirts"],
     gender: "men",
+    sales: 90,
+    discount: 20,
+    sale: true,
+    createdData: "2024-01-15T12:00:00Z",
     gallery: {
       "shadow olive": [
         {
@@ -181,6 +191,85 @@ export default [
           L: 6,
           XL: 3,
           XXL: 5,
+        },
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "3301 Regular Tapered Jeans",
+    mainImage: {
+      color: "worn in azure",
+      image: "/product_3/g-star-dakota-regular-straight-jeans-medium-blue.jpg",
+    },
+    hoverImage: "/product_3/g-star-3301-regular-tapered-jeans-medium-blue.jpg",
+    alt: "3301 Regular Tapered Jeans",
+    price: 119.95,
+    brand: "Outfits",
+    colors: ["Blue"],
+    category: ["Pants", "jeans"],
+    gender: "men",
+    sales: 160,
+    discount: 40,
+    sale: true,
+    createdData: "2024-01-15T12:00:00Z",
+    gallery: {
+      "worn in azure": [
+        {
+          thumbnail:
+            "/product_3/g-star-dakota-regular-straight-jeans-medium-blue.jpg",
+          large:
+            "/product_3/g-star-3301-regular-tapered-jeans-medium-blue (1).jpg",
+        },
+        {
+          thumbnail:
+            "/product_3/g-star-3301-regular-tapered-jeans-light-blue (3).jpg",
+          large:
+            "/product_3/g-star-3301-regular-tapered-jeans-light-blue (4).jpg",
+        },
+        {
+          thumbnail:
+            "/product_3/g-star-3301-regular-tapered-jeans-light-blue (15).jpg",
+          large:
+            "/product_3/g-star-3301-regular-tapered-jeans-light-blue (13).jpg",
+        },
+
+        {
+          thumbnail:
+            "/product_3/g-star-3301-regular-tapered-jeans-light-blue (20).jpg",
+          large:
+            "/product_3/g-star-3301-regular-tapered-jeans-light-blue (18).jpg",
+        },
+      ],
+    },
+    colorPanel: [
+      {
+        color: "worn in azure",
+        thumbnail:
+          "/product_3/g-star-3301-regular-tapered-jeans-light-blue.jpg",
+        colorImage:
+          "/product_3/g-star-dakota-regular-straight-jeans-medium-blue.jpg",
+        stockBySize: {
+          waist: {
+            29: {
+              lengths: {
+                32: 2,
+                34: 0,
+              },
+            },
+            30: {
+              lengths: {
+                32: 2,
+                34: 2,
+              },
+            },
+            32: {
+              lengths: {
+                32: 2,
+                34: 1,
+              },
+            },
+          },
         },
       },
     ],

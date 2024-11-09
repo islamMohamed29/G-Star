@@ -41,14 +41,6 @@ export const useProductFiltering = (initialProducts) => {
               key === "category"
             ) {
               if (key === "sizes") {
-                // filtered = filtered.filter((product) => {
-                //   return product.colorPanel.some((colorVariant) => {
-                //     return filters.sizes.some((selectedSize) => {
-                //       const sizeKey = convertSizeFormat(selectedSize);
-                //       return colorVariant.stockBySize[sizeKey] > 0;
-                //     });
-                //   });
-                // });
                 filtered = filtered.filter((product) => {
                   return product.colorPanel.some((colorVariant) => {
                     return filters.sizes.some((selectedSize) => {
@@ -65,18 +57,31 @@ export const useProductFiltering = (initialProducts) => {
                 });
               }
               if (key === "lengths") {
-                filtered = filtered.filter((product) =>
-                  filters[key].some((length) =>
-                    product.lengths?.includes(length)
-                  )
-                );
+                filtered = filtered.filter((product) => {
+                  return product.colorPanel.some((colorVariant) => {
+                    const waist = colorVariant.stockBySize?.waist;
+                    if (!waist) return false;
+                    return Object.values(waist).some((waistSize) => {
+                      const lengths = waistSize?.lengths;
+                      if (!lengths) return false;
+                      return filters.lengths.some((selectedLength) => {
+                        return Object.prototype.hasOwnProperty.call(
+                          lengths,
+                          selectedLength
+                        );
+                      });
+                    });
+                  });
+                });
               }
               if (key === "category") {
                 filtered = filtered.filter((product) =>
-                  filters[key].some((category) =>
-                    product.category
-                      ?.toLowerCase()
-                      .includes(category.toLowerCase())
+                  filters[key].some((filterCategory) =>
+                    product.category.some(
+                      (productCategory) =>
+                        productCategory.toLowerCase() ===
+                        filterCategory.toLowerCase()
+                    )
                   )
                 );
               }
@@ -85,6 +90,32 @@ export const useProductFiltering = (initialProducts) => {
                 filters[key].includes(product[key])
               );
             }
+          }
+        }
+
+        if (filters.sortedBy) {
+          switch (filters.sortedBy) {
+            case "Low to High":
+              filtered = filtered.sort((a, b) => a.price - b.price);
+              break;
+            case "High to Low":
+              filtered = filtered.sort((a, b) => b.price - a.price);
+              break;
+            case "Bestsellers":
+              filtered = filtered.sort((a, b) => b.sales - a.sales);
+              break;
+            case "New":
+              filtered = filtered.sort(
+                (a, b) => new Date(b.createdData) - new Date(a.createdData)
+              );
+              break;
+            case "Sale":
+              filtered = filtered
+                .filter((product) => product.sale === true)
+                .sort((a, b) => b.discount - a.discount);
+              break;
+            default:
+              break;
           }
         }
 

@@ -20,102 +20,249 @@ export default function ProductDetails() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedColorImage, setSelectedColorImage] = useState(null);
   const [lowStockMessage, setLowStockMessage] = useState("");
-
+  const [showAnimation, setShowAnimation] = useState(false);
+  // State for pants sizes
+  const [selectedWaist, setSelectedWaist] = useState(null);
+  const [selectedLength, setSelectedLength] = useState(null);
+  const [availableLengths, setAvailableLengths] = useState([]);
+  // State for regular sizes
   const [selectedSize, setSelectedSize] = useState(null);
   const cartData = useSelector((state) => state.cart.cartItems);
-  console.log(cartData, "cartData");
+  const [isPants, setIsPants] = useState(false);
+
   const isOpen = useSelector((state) => state.layout.navOpen);
   let currentLanguage = localStorage.getItem("language")
     ? localStorage.getItem("language")
     : "en";
-
+  // const isPants =
+  //   product?.category?.includes("Pants") ||
+  //   product?.category?.includes("jeans");
+  // console.log(isPants, "isPants");
   useEffect(() => {
     const foundProduct = products.find((product) => product.id === Number(id));
-    if (foundProduct) {
-      setProduct(foundProduct);
-      const initialColor = foundProduct.colorPanel[0]?.color;
-      setGalleryImages(foundProduct.gallery[initialColor] || []);
-      setSelectedImage(galleryImages[0]?.large || "");
-    }
-  }, [id]);
-
-  useEffect(() => {
-    const foundProduct = products.find((product) => product.id === Number(id));
-
     if (
       foundProduct &&
       foundProduct.colorPanel &&
       foundProduct.colorPanel.length > 0
     ) {
       setProduct(foundProduct);
+      setIsPants(
+        foundProduct.category?.includes("Pants") ||
+          foundProduct.category?.includes("jeans")
+      );
+      // setIsPants(
+      //   foundProduct.category?.includes("Pants") ||
+      //   foundProduct.category?.includes("jeans")
+      // );
       const initialColor = foundProduct.colorPanel[0]?.color;
-
       setSelectedColor(initialColor);
       const initialImages = foundProduct.gallery[initialColor] || [];
+
       setGalleryImages(initialImages);
       setSelectedImage(initialImages[0]?.large || "");
+
       setSelectedColorImage(foundProduct.colorPanel[0]?.colorImage);
+
+      // Reset size selections when product changes
+      setSelectedWaist(null);
+      setSelectedLength(null);
+      setSelectedSize(null);
     }
   }, [id]);
 
+  useEffect(() => {
+    if (selectedWaist && selectedColor && isPants) {
+      const colorPanel = product.colorPanel.find(
+        (panel) => panel.color === selectedColor
+      );
+      if (colorPanel?.stockBySize?.waist?.[selectedWaist]?.lengths) {
+        const lengths = Object.entries(
+          colorPanel.stockBySize.waist[selectedWaist].lengths
+        ).map(([length, stock]) => ({
+          length: parseInt(length),
+          stock,
+        }));
+        setAvailableLengths(lengths);
+      }
+    }
+  }, [selectedWaist, selectedColor]);
+  // Function to get all available waist sizes
+  const getAvailableWaistSizes = () => {
+    if (!isPants || !selectedColor) return [];
+
+    const colorPanel = product.colorPanel.find(
+      (panel) => panel.color === selectedColor
+    );
+
+    return Object.keys(colorPanel?.stockBySize?.waist || {}).map((waist) =>
+      parseInt(waist)
+    );
+  };
+
+  // Function to check if a waist size has any available lengths
+  const hasAvailableLengths = (waist) => {
+    if (!selectedColor) return false;
+
+    const colorPanel = product.colorPanel.find(
+      (panel) => panel.color === selectedColor
+    );
+
+    const lengths = colorPanel?.stockBySize?.waist?.[waist]?.lengths || {};
+    return Object.values(lengths).some((stock) => stock > 0);
+  };
+
+  // Function to check if a specific length is available for selected waist
+  const isLengthAvailable = (length) => {
+    if (!selectedWaist || !selectedColor) return false;
+
+    const colorPanel = product.colorPanel.find(
+      (panel) => panel.color === selectedColor
+    );
+
+    return (
+      (colorPanel?.stockBySize?.waist?.[selectedWaist]?.lengths?.[length] ||
+        0) > 0
+    );
+  };
+
   function handleColorChange(color, image) {
+    if (color === selectedColor) return;
     if (product && product.gallery && product.gallery[color]) {
       const updatedGallery = product.gallery[color] || [];
       setGalleryImages(updatedGallery);
       setSelectedColor(color);
       setSelectedImage(updatedGallery[0]?.large || "");
       setSelectedColorImage(image);
+      setSelectedWaist(null);
+      setSelectedLength(null);
       setSelectedSize(null);
+      setLowStockMessage("");
     }
   }
-  const [showAnimation, setShowAnimation] = useState(false);
-  const handleAddToCart = () => {
-    if (!selectedSize) {
-      notifyWarning(Resources["selectSizeFirst"][currentLanguage]);
-      return;
-    }
-    const selectedColorStock = product.colorPanel.find(
-      (color) => color.color === selectedColor
-    )?.stockBySize;
 
-    if (!selectedColorStock || !selectedColorStock[selectedSize]) {
-      alert("عذراً، هذا المقاس غير متوفر حالياً.");
-      return;
-    }
-    const availableStock = selectedColorStock[selectedSize];
-    // const availableStock = product.stockBySize[selectedSize];
-    if (!availableStock || availableStock <= 0) {
-      alert("عذراً، هذا المقاس غير متوفر حالياً.");
-      return;
-    }
+  function handleWaistChange(waist) {
+    setSelectedWaist(waist);
+    setSelectedLength(null); // Reset length when waist changes
+    setLowStockMessage("");
+  }
 
-    const existingCartItem = cartData.find(
-      (item) =>
-        item.id === product.id &&
-        item.selectedColor === selectedColor &&
-        item.selectedSize === selectedSize
+  function handleLengthChange(length) {
+    setSelectedLength(length);
+
+    const colorPanel = product.colorPanel.find(
+      (panel) => panel.color === selectedColor
     );
 
-    if (existingCartItem) {
-      if (existingCartItem.quantity >= availableStock) {
+    const stock =
+      colorPanel?.stockBySize?.waist?.[selectedWaist]?.lengths?.[length];
+
+    if (stock <= 2 && stock > 0) {
+      setLowStockMessage(
+        <>
+          The available quantity for Waist <strong>{selectedWaist}</strong> and
+          Length <strong>{length}</strong> in <strong>{selectedColor}</strong>{" "}
+          is only <strong>{stock}</strong>!
+        </>
+      );
+    } else {
+      setLowStockMessage("");
+    }
+  }
+
+  const handleAddToCart = () => {
+    if (isPants) {
+      if (!selectedWaist || !selectedLength) {
+        notifyWarning(Resources["selectSizeFirst"][currentLanguage]);
+        return;
+      }
+
+      const colorPanel = product.colorPanel.find(
+        (panel) => panel.color === selectedColor
+      );
+
+      const stock =
+        colorPanel?.stockBySize?.waist?.[selectedWaist]?.lengths?.[
+          selectedLength
+        ];
+
+      if (!stock || stock <= 0) {
+        notifyWarning("Sorry, this size combination is not available.");
+        return;
+      }
+
+      const existingCartItem = cartData.find(
+        (item) =>
+          item.id === product.id &&
+          item.selectedColor === selectedColor &&
+          item.selectedWaist === selectedWaist &&
+          item.selectedLength === selectedLength
+      );
+
+      if (existingCartItem && existingCartItem.quantity >= stock) {
         notifyWarning(
-          `${Resources["cannotAddMore"][currentLanguage]} + ${availableStock}.`
+          `${Resources["cannotAddMore"][currentLanguage]} ${stock}.`
         );
         return;
       }
-      setShowAnimation(false);
-      setTimeout(() => setShowAnimation(true), 10);
-    }
 
-    dispatch(
-      addItem({
-        ...product,
-        selectedSize,
-        selectedColor,
-        quantity: 1,
-        availableStock,
-      })
-    );
+      dispatch(
+        addItem({
+          ...product,
+          selectedWaist,
+          selectedLength,
+          selectedColor,
+          quantity: 1,
+          availableStock: stock,
+        })
+      );
+    } else {
+      if (!selectedSize) {
+        notifyWarning(Resources["selectSizeFirst"][currentLanguage]);
+        return;
+      }
+      const selectedColorStock = product.colorPanel.find(
+        (color) => color.color === selectedColor
+      )?.stockBySize;
+
+      if (!selectedColorStock || !selectedColorStock[selectedSize]) {
+        alert("عذراً، هذا المقاس غير متوفر حالياً.");
+        return;
+      }
+      const availableStock = selectedColorStock[selectedSize];
+      // const availableStock = product.stockBySize[selectedSize];
+      if (!availableStock || availableStock <= 0) {
+        alert("عذراً، هذا المقاس غير متوفر حالياً.");
+        return;
+      }
+
+      const existingCartItem = cartData.find(
+        (item) =>
+          item.id === product.id &&
+          item.selectedColor === selectedColor &&
+          item.selectedSize === selectedSize
+      );
+
+      if (existingCartItem) {
+        if (existingCartItem.quantity >= availableStock) {
+          notifyWarning(
+            `${Resources["cannotAddMore"][currentLanguage]} + ${availableStock}.`
+          );
+          return;
+        }
+        setShowAnimation(false);
+        setTimeout(() => setShowAnimation(true), 10);
+      }
+
+      dispatch(
+        addItem({
+          ...product,
+          selectedSize,
+          selectedColor,
+          quantity: 1,
+          availableStock,
+        })
+      );
+    }
   };
   function handleSizeChange(size) {
     setSelectedSize(size);
@@ -134,7 +281,7 @@ export default function ProductDetails() {
         </>
       );
     } else {
-      setLowStockMessage(""); // عدم عرض الرسالة إذا كانت الكمية أكبر من 2
+      setLowStockMessage("");
     }
   }
   return (
@@ -193,72 +340,108 @@ export default function ProductDetails() {
                   </div>
                   <div className="sizing-area">
                     <p className="special-gray-title-14 ">Sizing</p>
-                    <p className="size special-gray-title-13 m-0">size</p>
-                    <div className="panel">
-                      <ul className="my-6">
-                        {/* {product.sizes &&
-                          product.sizes.map((size, index) => (
-                            <li
-                              className={
-                                selectedSize === size ? "selected-size" : ""
-                              }
-                              onClick={() => setSelectedSize(size)}
-                              key={index}
-                            >
-                              {size}
-                            </li>
-                          ))} */}
-                        {/* {product.sizes &&
-                          product.sizes.map((size, index) => {
-                            const isAvailable =
-                              product.stockBySize &&
-                              product.stockBySize[size] > 0;
-                            return (
+                    {isPants ? (
+                      <>
+                        {/* Waist sizes */}
+                        <p className="size special-gray-title-13 m-0">Waist</p>
+                        <div className="panel">
+                          <ul className="my-6">
+                            {getAvailableWaistSizes().map((waist) => (
                               <li
+                                key={waist}
                                 className={`size-item ${
-                                  selectedSize === size ? "selected-size" : ""
-                                } ${!isAvailable ? "disabled-size" : ""}`}
+                                  selectedWaist === waist ? "selected-size" : ""
+                                } ${
+                                  !hasAvailableLengths(waist)
+                                    ? "disabled-size"
+                                    : ""
+                                }`}
                                 onClick={() =>
-                                  isAvailable && setSelectedSize(size)
+                                  hasAvailableLengths(waist) &&
+                                  handleWaistChange(waist)
                                 }
-                                key={index}
-                                aria-disabled={!isAvailable}
                               >
-                                {size}
+                                {waist}
                               </li>
-                            );
-                          })} */}
-                        {selectedColor &&
-                          product.colorPanel.find(
-                            (color) => color.color === selectedColor
-                          )?.stockBySize &&
-                          Object.keys(
-                            product.colorPanel.find(
-                              (color) => color.color === selectedColor
-                            ).stockBySize
-                          ).map((size, index) => {
-                            const availableStock = product.colorPanel.find(
-                              (color) => color.color === selectedColor
-                            ).stockBySize[size];
-                            const isAvailable = availableStock > 0;
-                            return (
-                              <li
-                                key={index}
-                                className={`size-item ${
-                                  selectedSize === size ? "selected-size" : ""
-                                } ${!isAvailable ? "disabled-size" : ""}`}
-                                onClick={() =>
-                                  isAvailable && handleSizeChange(size)
-                                }
-                                aria-disabled={!isAvailable}
-                              >
-                                {size}
-                              </li>
-                            );
-                          })}
-                      </ul>
-                    </div>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Length sizes */}
+                        {selectedWaist && (
+                          <>
+                            <p className="size special-gray-title-13 m-0">
+                              Length
+                            </p>
+                            <div className="panel">
+                              <ul className="my-6">
+                                {availableLengths.map(({ length }) => (
+                                  <li
+                                    key={length}
+                                    className={`size-item ${
+                                      selectedLength === length
+                                        ? "selected-size"
+                                        : ""
+                                    } ${
+                                      !isLengthAvailable(length)
+                                        ? "disabled-size"
+                                        : ""
+                                    }`}
+                                    onClick={() =>
+                                      isLengthAvailable(length) &&
+                                      handleLengthChange(length)
+                                    }
+                                  >
+                                    {length}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <p className="size special-gray-title-13 m-0">Size</p>
+
+                        <div className="panel">
+                          <ul className="my-6">
+                            {selectedColor &&
+                              product.colorPanel.find(
+                                (color) => color.color === selectedColor
+                              )?.stockBySize &&
+                              Object.keys(
+                                product.colorPanel.find(
+                                  (color) => color.color === selectedColor
+                                ).stockBySize
+                              ).map((size, index) => {
+                                const availableStock = product.colorPanel.find(
+                                  (color) => color.color === selectedColor
+                                ).stockBySize[size];
+                                const isAvailable = availableStock > 0;
+                                return (
+                                  <li
+                                    key={index}
+                                    className={`size-item ${
+                                      selectedSize === size
+                                        ? "selected-size"
+                                        : ""
+                                    } ${!isAvailable ? "disabled-size" : ""}`}
+                                    onClick={() =>
+                                      isAvailable && handleSizeChange(size)
+                                    }
+                                    aria-disabled={!isAvailable}
+                                  >
+                                    {size}
+                                  </li>
+                                );
+                              })}
+                          </ul>
+                        </div>
+                      </>
+                    )}
                   </div>
+
                   <div className="is-available">
                     <p>Product is available</p>
                   </div>
@@ -266,11 +449,7 @@ export default function ProductDetails() {
                     <p>{lowStockMessage}</p>
                   </div>
                   <div className="buttons-area">
-                    <button
-                      onClick={handleAddToCart}
-                      // disabled={!selectedSize}
-                      className="add_cart"
-                    >
+                    <button onClick={handleAddToCart} className="add_cart">
                       add to bag
                       {showAnimation && <QuantityIncrementAnimation />}
                     </button>

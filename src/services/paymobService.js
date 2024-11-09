@@ -8,6 +8,9 @@ export class PayMobService {
 
   // Step 1: Authentication Request
   async authenticate() {
+    console.log("API Key:", this.apiKey);
+    console.log("Integration ID:", this.integrationId);
+    console.log("Iframe ID:", this.frameId);
     try {
       const response = await fetch(`${this.baseUrl}/auth/tokens`, {
         method: "POST",
@@ -53,6 +56,7 @@ export class PayMobService {
   // Step 3: Payment Key Request
   async getPaymentKey(authToken, orderId, amount, billingData) {
     try {
+      console.log("IAmHERE");
       const response = await fetch(`${this.baseUrl}/acceptance/payment_keys`, {
         method: "POST",
         headers: {
@@ -67,6 +71,8 @@ export class PayMobService {
           currency: "EGP",
           integration_id: this.integrationId,
           lock_order_when_paid: true,
+          success_url: "http://localhost:5173/payment-callback", // تم التحديث
+          failure_url: "http://localhost:5173/payment-callback", // تم التحديث
         }),
       });
       const data = await response.json();
