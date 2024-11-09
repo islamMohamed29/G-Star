@@ -69,7 +69,7 @@ function App() {
   ];
   return (
     <>
-      <Router>
+      <Router basename="/">
         <ScrollToTop />
         <Suspense fallback={<MainLoading />}>
           <Routes>

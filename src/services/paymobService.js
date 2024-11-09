@@ -71,8 +71,8 @@ export class PayMobService {
           currency: "EGP",
           integration_id: this.integrationId,
           lock_order_when_paid: true,
-          success_url: "https://rawwww.vercel.app/payment-callback", // تم التحديث
-          failure_url: "https://rawwww.vercel.app/payment-callback", // تم التحديث
+          success_url: `${window.location.origin}/payment-callback`,
+          failure_url: `${window.location.origin}/payment-callback`,
         }),
       });
       const data = await response.json();
