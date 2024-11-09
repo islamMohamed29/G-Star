@@ -28,6 +28,18 @@ function App() {
         { path: "shop", element: <Shop /> },
         { path: "search", element: <SearchPage /> },
         {
+          path: "payment-callback",
+          element: <PaymentCallback />,
+        },
+        {
+          path: "payment-success",
+          element: <PaymentSuccess />,
+        },
+        {
+          path: "payment-failed",
+          element: <PaymentFailed />,
+        },
+        {
           path: "login",
           element: (
             <ProtectedRoute isCanGo={true} redirectTo="/">
@@ -48,18 +60,7 @@ function App() {
         { path: "*", element: <NotFound /> },
       ],
     },
-    {
-      path: "/payment-callback",
-      element: <PaymentCallback />,
-    },
-    {
-      path: "/payment-success",
-      element: <PaymentSuccess />,
-    },
-    {
-      path: "/payment-failed",
-      element: <PaymentFailed />,
-    },
+
     {
       path: "/checkout",
       element: <LayoutWithoutFooter />,

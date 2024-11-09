@@ -71,10 +71,8 @@ export class PayMobService {
           currency: "EGP",
           integration_id: this.integrationId,
           lock_order_when_paid: true,
-          success_url:
-            "https://rawwww-k4vavtf20-islammohameds-projects-4db5f8e1.vercel.app/payment-callback", // تم التحديث
-          failure_url:
-            "https://rawwww-k4vavtf20-islammohameds-projects-4db5f8e1.vercel.app/payment-callback", // تم التحديث
+          success_url: "https://rawwww.vercel.app/payment-callback", // تم التحديث
+          failure_url: "https://rawwww.vercel.app/payment-callback", // تم التحديث
         }),
       });
       const data = await response.json();
