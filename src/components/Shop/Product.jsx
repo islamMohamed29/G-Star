@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { saveRecentlyViewed } from "../RecentlyViewed/RecentlyViewed";
 
 const Product = ({ product }) => {
+  const productUrl = `/product/${product.id}?color=${encodeURIComponent(
+    product.mainImage.color
+  )}`;
   useEffect(() => {
     saveRecentlyViewed(product);
   }, [product]);
@@ -22,7 +25,8 @@ const Product = ({ product }) => {
   return (
     <div className="col-md-3">
       <div className="product">
-        <Link to={`/shop/product/${product.id}`}>
+        {/* <Link to={`/shop/product/${product.id}`}> */}
+        <Link to={`/shop${productUrl}`}>
           <img
             src={product.mainImage.image}
             alt={`${product.name}`}

@@ -5,16 +5,22 @@ import TopBar from "../components/TopBar";
 import { Link } from "react-router-dom";
 import { paymobService } from "../services/paymobService";
 
-import {
-  removeItemCart,
-  updateQuantity,
-  updateTotalAmount,
-} from "../redux/slices/cart-slice";
+import { updateQuantity } from "../redux/slices/cart-slice";
 import { MainLoading } from "../components/Loading/MainLoading.jsx";
 export default function CheckOut() {
-  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [testUserDetails, setTestUserDetails] = useState({
+    firstName: "Islam",
+    lastName: "Mohamed",
+    email: "islammohamed.me@gmail.com",
+    phone: "01011151022",
+    street: "3 st ard eltrab",
+    city: "bahtim",
+    state: "Test",
+    country: "Egypt",
+    postalCode: "112233",
+  });
   const isOpen = useSelector((state) => state.layout.navOpen);
   let cartData = useSelector((state) => state.cart.cartItems);
   let subTotal = useSelector((state) => state.cart.subTotal);
@@ -49,7 +55,6 @@ export default function CheckOut() {
   const handlePayment = async (userInfo) => {
     setIsLoading(true);
     try {
-      setIsProcessing(true);
       setError(null);
 
       // Step 1: Authentication
@@ -72,7 +77,6 @@ export default function CheckOut() {
         billingData
       );
 
-      console.log("payment Key", paymentKey);
       // Step 4: Redirect to Payment iframe
       const iframeUrl = `https://accept.paymob.com/api/acceptance/iframes/${paymobService.frameId}?payment_token=${paymentKey}`;
       window.location.href = iframeUrl;
@@ -80,7 +84,7 @@ export default function CheckOut() {
       console.error("Payment process error:", error);
       setError("حدث خطأ أثناء معالجة الدفع. يرجى المحاولة مرة أخرى.");
     } finally {
-      setIsProcessing(false);
+      setIsLoading(false);
     }
   };
   return (
@@ -106,7 +110,10 @@ export default function CheckOut() {
                 {Resources["shoppingBag"][currentLanguage]}
               </h1>
               {cartData.length > 0 && (
-                <div className="xLarge_button">
+                <div
+                  className="xLarge_button"
+                  onClick={() => handlePayment(testUserDetails)}
+                >
                   {Resources["proceedToCheckout"][currentLanguage]}
                   <span className="icon_right">
                     <i class="fa-solid fa-chevron-right"></i>
@@ -137,19 +144,6 @@ export default function CheckOut() {
                     <div className="cart_products">
                       {cartData.map((productCheckOut) => (
                         <li className="product">
-                          {/* <span
-                          onClick={() =>
-                            dispatch(
-                              removeItemCart({
-                                id: productCheckOut.id,
-                                size: productCheckOut.selectedSize,
-                              })
-                            )
-                          }
-                          className="remove_product"
-                        >
-                          <i class="fa-solid fa-xmark"></i>
-                        </span> */}
                           <div className="image">
                             <img
                               src={
@@ -282,31 +276,19 @@ export default function CheckOut() {
                           </p>
                           <p className="data">€ {totalAmount}</p>
                         </div>
-                        {/* <div className="saved">
-                        You save € 249,96 with this order
-                      </div> */}
                       </div>
                       <div className="action_btns">
-                        <div className="large_button">
+                        <div
+                          className="large_button"
+                          onClick={() => handlePayment(testUserDetails)}
+                        >
                           {Resources["proceedToCheckout"][currentLanguage]}
                           <span className="icon_right">
                             <i class="fa-solid fa-chevron-right"></i>
                           </span>
                         </div>
                         <div
-                          onClick={() =>
-                            handlePayment({
-                              firstName: "Islam",
-                              lastName: "Mohamed",
-                              email: "islammohamed.me@gmail.com",
-                              phone: "01011151022",
-                              street: "3 st ard eltrab",
-                              city: "bahtim",
-                              state: "Test",
-                              country: "Egypt",
-                              postalCode: "112233",
-                            })
-                          }
+                          onClick={() => handlePayment(testUserDetails)}
                           className="large_button payPal"
                         >
                           <img src="/paypal-button-logo.png" alt="" />

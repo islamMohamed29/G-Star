@@ -3,6 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSearchQuery } from "../../redux/slices/search-slice";
 const keywords = ["Nifous", "Nifous 22", "Carg", "Jean"];
+const getProductsWithColors = (products) => {
+  return products.flatMap((product) =>
+    product.colorPanel.map((panel) => ({
+      ...product,
+      mainImage: {
+        color: panel.color,
+        image: panel.colorImage,
+      },
+      variantId: `${product.id}-${panel.color}`,
+    }))
+  );
+};
 export default function SearchBar() {
   const [showResult, setShowResult] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -16,7 +28,9 @@ export default function SearchBar() {
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
     if (inputValue) {
-      const results = filteredProducts.filter((product) =>
+      const productsWithColors = getProductsWithColors(filteredProducts);
+      // const results = filteredProducts.filter((product) =>
+      const results = productsWithColors.filter((product) =>
         product.name.toLowerCase().includes(inputValue.toLowerCase())
       );
       setSearchResults(results);
@@ -43,37 +57,48 @@ export default function SearchBar() {
     if (e.key === "Enter") {
       dispatch(setSearchQuery(inputValue));
       navigate(`/search`);
-      inputRef.current.blur(); // إزالة التركيز بعد البحث
+      inputRef.current.blur();
     }
   };
   const handleResultClick = (product) => {
-    navigate(`/shop/product/${product.id}`);
-    inputRef.current.blur(); // إزالة التركيز بعد البحث
-    // setInputValue(productName);
-    // dispatch(setSearchQuery(productName));
-    // navigate(`/search`);
+    const productUrl = `/product/${product.id}?color=${encodeURIComponent(
+      product.mainImage.color
+    )}`;
+    // navigate(`/shop/product/${product.id}`);
+    navigate(`/shop${productUrl}`);
+
+    inputRef.current.blur();
     setShowResult(false);
   };
   const handleKeywordClick = (keyword) => {
     setInputValue(keyword);
     dispatch(setSearchQuery(keyword));
     navigate(`/search`);
-    inputRef.current.blur(); // إزالة التركيز بعد البحث
+    inputRef.current.blur();
     setShowResult(false);
   };
 
+  // const combinedResults = [
+  //   ...searchResults,
+  //   ...keywords
+  //     .map((keyword) => keyword.toLocaleLowerCase())
+  //     .filter((keyword) => keyword.includes(inputValue.toLocaleLowerCase())),
+  // ].sort((a, b) => {
+  //   const isAObject = typeof a === "object";
+  //   const isBObject = typeof b === "object";
+  //   if (isAObject && !isBObject) return 1;
+  //   if (!isAObject && isBObject) return -1;
+  //   return 0;
+  // });
   const combinedResults = [
-    ...searchResults,
     ...keywords
-      .map((keyword) => keyword.toLocaleLowerCase())
-      .filter((keyword) => keyword.includes(inputValue.toLocaleLowerCase())),
-  ].sort((a, b) => {
-    const isAObject = typeof a === "object";
-    const isBObject = typeof b === "object";
-    if (isAObject && !isBObject) return 1;
-    if (!isAObject && isBObject) return -1;
-    return 0;
-  });
+      .filter((keyword) =>
+        keyword.toLowerCase().includes(inputValue.toLowerCase())
+      )
+      .map((keyword) => ({ isKeyword: true, value: keyword })),
+    ...searchResults.map((product) => ({ isKeyword: false, value: product })),
+  ];
+
   return (
     <div className="search">
       <label htmlFor="search">
@@ -92,7 +117,7 @@ export default function SearchBar() {
         className="search_input"
         ref={inputRef}
       />
-      {inputValue && combinedResults.length > 0 && showResult && (
+      {/* {inputValue && combinedResults.length > 0 && showResult && (
         <ul className="search-results">
           {combinedResults.map((item) => (
             <li
@@ -104,8 +129,6 @@ export default function SearchBar() {
                   : handleResultClick(item)
               }
             >
-              {/* {console.log(combinedResults, "combinedResults")}
-              {typeof item === "string" ? item : item.name}{" "} */}
               {typeof item === "string" && <p className="keyword">{item}</p>}
               {typeof item !== "string" && (
                 <div className="search_product">
@@ -118,6 +141,38 @@ export default function SearchBar() {
                       <p className="color">{item.mainImage.color}</p>
                     </div>
                     <p className="price">E{item.price}</p>
+                  </div>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )} */}
+      {inputValue && combinedResults.length > 0 && showResult && (
+        <ul className="search-results">
+          {combinedResults.map((item) => (
+            <li
+              key={item.isKeyword ? item.value : item.value.variantId}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() =>
+                item.isKeyword
+                  ? handleKeywordClick(item.value)
+                  : handleResultClick(item.value)
+              }
+            >
+              {item.isKeyword ? (
+                <p className="keyword">{item.value}</p>
+              ) : (
+                <div className="search_product">
+                  <div className="image">
+                    <img src={item.value.mainImage.image} alt="" />
+                  </div>
+                  <div className="details">
+                    <div className="left">
+                      <p className="name">{item.value.name}</p>
+                      <p className="color">{item.value.mainImage.color}</p>
+                    </div>
+                    <p className="price">E{item.value.price}</p>
                   </div>
                 </div>
               )}

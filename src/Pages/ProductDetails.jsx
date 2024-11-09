@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import products from "../json/products";
 import { useDispatch, useSelector } from "react-redux";
 import ProductGallery from "./ProductGallery.jsx";
@@ -14,6 +14,7 @@ export default function ProductDetails() {
   const detailsRef = useRef(null);
   let dispatch = useDispatch();
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const [product, setProduct] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [galleryImages, setGalleryImages] = useState([]);
@@ -21,11 +22,9 @@ export default function ProductDetails() {
   const [selectedColorImage, setSelectedColorImage] = useState(null);
   const [lowStockMessage, setLowStockMessage] = useState("");
   const [showAnimation, setShowAnimation] = useState(false);
-  // State for pants sizes
   const [selectedWaist, setSelectedWaist] = useState(null);
   const [selectedLength, setSelectedLength] = useState(null);
   const [availableLengths, setAvailableLengths] = useState([]);
-  // State for regular sizes
   const [selectedSize, setSelectedSize] = useState(null);
   const cartData = useSelector((state) => state.cart.cartItems);
   const [isPants, setIsPants] = useState(false);
@@ -34,10 +33,7 @@ export default function ProductDetails() {
   let currentLanguage = localStorage.getItem("language")
     ? localStorage.getItem("language")
     : "en";
-  // const isPants =
-  //   product?.category?.includes("Pants") ||
-  //   product?.category?.includes("jeans");
-  // console.log(isPants, "isPants");
+
   useEffect(() => {
     const foundProduct = products.find((product) => product.id === Number(id));
     if (
@@ -50,25 +46,31 @@ export default function ProductDetails() {
         foundProduct.category?.includes("Pants") ||
           foundProduct.category?.includes("jeans")
       );
-      // setIsPants(
-      //   foundProduct.category?.includes("Pants") ||
-      //   foundProduct.category?.includes("jeans")
-      // );
-      const initialColor = foundProduct.colorPanel[0]?.color;
-      setSelectedColor(initialColor);
-      const initialImages = foundProduct.gallery[initialColor] || [];
+      const colorFromUrl = searchParams.get("color");
+      const initialColorPanel = colorFromUrl
+        ? foundProduct.colorPanel.find((panel) => panel.color === colorFromUrl)
+        : foundProduct.colorPanel[0];
+      if (initialColorPanel) {
+        const initialColor = initialColorPanel.color;
+        setSelectedColor(initialColor);
+        const initialImages = foundProduct.gallery[initialColor] || [];
+        setGalleryImages(initialImages);
+        setSelectedImage(initialImages[0]?.large || "");
+        setSelectedColorImage(initialColorPanel.colorImage);
+      }
 
-      setGalleryImages(initialImages);
-      setSelectedImage(initialImages[0]?.large || "");
+      // const initialColor = foundProduct.colorPanel[0]?.color;
+      // setSelectedColor(initialColor);
+      // const initialImages = foundProduct.gallery[initialColor] || [];
+      // setGalleryImages(initialImages);
+      // setSelectedImage(initialImages[0]?.large || "");
+      // setSelectedColorImage(foundProduct.colorPanel[0]?.colorImage);
 
-      setSelectedColorImage(foundProduct.colorPanel[0]?.colorImage);
-
-      // Reset size selections when product changes
       setSelectedWaist(null);
       setSelectedLength(null);
       setSelectedSize(null);
     }
-  }, [id]);
+  }, [id, searchParams]);
 
   useEffect(() => {
     if (selectedWaist && selectedColor && isPants) {
