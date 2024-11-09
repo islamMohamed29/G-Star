@@ -10,9 +10,11 @@ import {
   updateQuantity,
   updateTotalAmount,
 } from "../redux/slices/cart-slice";
+import { MainLoading } from "../components/Loading/MainLoading.jsx";
 export default function CheckOut() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const isOpen = useSelector((state) => state.layout.navOpen);
   let cartData = useSelector((state) => state.cart.cartItems);
   let subTotal = useSelector((state) => state.cart.subTotal);
@@ -45,6 +47,7 @@ export default function CheckOut() {
 
   // start payment
   const handlePayment = async (userInfo) => {
+    setIsLoading(true);
     try {
       setIsProcessing(true);
       setError(null);
@@ -82,6 +85,7 @@ export default function CheckOut() {
   };
   return (
     <div className="checkout_cart">
+      {isLoading && <MainLoading />}
       <div className={`custom-container ${isOpen ? "nav-open" : ""}`}>
         <TopBar isDark={true} />
 

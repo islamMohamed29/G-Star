@@ -165,7 +165,7 @@ const CategoryFilter = () => {
           <input
             type="checkbox"
             className="filterCheckBox"
-            name="t_Shirts"
+            name="T-shirts"
             id="tShirtsCheckBox"
             onChange={handleCheckBoxChange}
           />

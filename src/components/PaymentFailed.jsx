@@ -1,16 +1,20 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
+import Resources from "../locales/Resources.json";
 
 const PaymentFailed = () => {
   const location = useLocation();
   const error =
     location.state?.error || "An error occurred during payment processing";
 
+  let currentLanguage = localStorage.getItem("language")
+    ? localStorage.getItem("language")
+    : "en";
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+    <div className="callback_page">
+      <div className="wrapper">
+        <div className="head">
+          <div className="icon_failed">
             <svg
               className="w-8 h-8 text-red-500"
               fill="none"
@@ -25,25 +29,19 @@ const PaymentFailed = () => {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Payment Failed
-          </h2>
-          <p className="text-gray-600 mb-6">{error}</p>
-
-          <div className="space-y-4">
-            <Link
-              to="/checkout"
-              className="block w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-            >
-              Try Again
-            </Link>
-            <Link
-              to="/shop"
-              className="block w-full bg-gray-200 text-gray-700 py-2 px-4 rounded hover:bg-gray-300 transition"
-            >
-              Return to Shop
-            </Link>
-          </div>
+          <h2 className="title_faild">Payment Failed</h2>
+        </div>
+        <p className="message">{error}</p>
+        <div className="actions_bottom">
+          <Link to={"/shop"} className={`header_link`}>
+            <span className="icon_left">
+              <i class="fa-solid fa-chevron-left"></i>
+            </span>
+            Return to Shop
+          </Link>
+          <Link className="large_button" to="/checkout/shopping-bag">
+            Try Again
+          </Link>
         </div>
       </div>
     </div>

@@ -8,9 +8,6 @@ export class PayMobService {
 
   // Step 1: Authentication Request
   async authenticate() {
-    console.log("API Key:", this.apiKey);
-    console.log("Integration ID:", this.integrationId);
-    console.log("Iframe ID:", this.frameId);
     try {
       const response = await fetch(`${this.baseUrl}/auth/tokens`, {
         method: "POST",

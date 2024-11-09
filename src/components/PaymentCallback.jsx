@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const PaymentCallback = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let cartData = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
     const handlePaymentResponse = () => {
@@ -31,6 +32,7 @@ const PaymentCallback = () => {
             currency: searchParams.get("currency"),
             paymentId: searchParams.get("id"),
             createdAt: searchParams.get("created_at"),
+            products: cartData,
             paymentMethod: {
               type: searchParams.get("source_data.type"),
               subType: searchParams.get("source_data.sub_type"),

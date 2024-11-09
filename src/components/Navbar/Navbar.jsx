@@ -241,7 +241,7 @@ export default function Navbar() {
                                 </div>
                                 <div className="bottom">
                                   <p>
-                                    {productCart.category} /{" "}
+                                    {productCart.category[0]} /{" "}
                                     {productCart.selectedColor} /{" "}
                                     {productCart.selectedSize} /{" "}
                                     {productCart.quantity}
