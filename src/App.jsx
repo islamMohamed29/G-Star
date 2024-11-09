@@ -7,6 +7,8 @@ import ProtectedRoute from "./components/helpers/ProtectedRoute.jsx";
 import ScrollToTop from "./components/helpers/ScrollToTop.jsx";
 import { MainLoading } from "./components/Loading/MainLoading.jsx";
 import PaymentCallback from "./components/PaymentCallback.jsx";
+import PaymentFailed from "./components/PaymentFailed.jsx";
+import PaymentSuccess from "./components/PaymentSuccess.jsx";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Shop = lazy(() => import("./Pages/Shop"));
@@ -49,6 +51,14 @@ function App() {
     {
       path: "/payment-callback",
       element: <PaymentCallback />,
+    },
+    {
+      path: "/payment-success",
+      element: <PaymentSuccess />,
+    },
+    {
+      path: "/payment-failed",
+      element: <PaymentFailed />,
     },
     {
       path: "/checkout",
