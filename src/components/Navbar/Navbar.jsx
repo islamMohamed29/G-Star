@@ -205,13 +205,36 @@ export default function Navbar() {
                           {cartData?.map((productCart) => (
                             <li className="product">
                               <span
-                                onClick={() =>
-                                  dispatch(
-                                    removeItemCart({
-                                      id: productCart.id,
-                                      size: productCart.selectedSize,
-                                    })
-                                  )
+                                onClick={
+                                  () => {
+                                    if (
+                                      productCart.selectedLength &&
+                                      productCart.selectedWaist
+                                    ) {
+                                      dispatch(
+                                        removeItemCart({
+                                          id: productCart.id,
+                                          waist: productCart.selectedWaist,
+                                          length: productCart.selectedLength,
+                                          color: productCart.selectedColor,
+                                        })
+                                      );
+                                    } else {
+                                      dispatch(
+                                        removeItemCart({
+                                          id: productCart.id,
+                                          size: productCart.selectedSize,
+                                          color: productCart.selectedColor,
+                                        })
+                                      );
+                                    }
+                                  }
+                                  // dispatch(
+                                  //   removeItemCart({
+                                  //     id: productCart.id,
+                                  //     size: productCart.selectedSize,
+                                  //   })
+                                  // )
                                 }
                                 className="remove_product"
                               >
@@ -243,8 +266,10 @@ export default function Navbar() {
                                   <p>
                                     {productCart.category[0]} /{" "}
                                     {productCart.selectedColor} /{" "}
-                                    {productCart.selectedSize} /{" "}
-                                    {productCart.quantity}
+                                    {productCart.category[0] === "Pants"
+                                      ? `W${productCart.selectedWaist} L${productCart.selectedLength}`
+                                      : `${productCart.selectedSize}`}{" "}
+                                    / {productCart.quantity}
                                   </p>
                                 </div>
                               </div>

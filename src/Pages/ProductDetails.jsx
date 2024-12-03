@@ -207,6 +207,18 @@ export default function ProductDetails() {
         return;
       }
 
+      if (existingCartItem) {
+        console.log(existingCartItem, "existingCartItem");
+        if (existingCartItem.quantity >= stock) {
+          notifyWarning(
+            `${Resources["cannotAddMore"][currentLanguage]} + ${stock}.`
+          );
+          return;
+        }
+        setShowAnimation(false);
+        setTimeout(() => setShowAnimation(true), 10);
+      }
+
       dispatch(
         addItem({
           ...product,
@@ -218,6 +230,7 @@ export default function ProductDetails() {
         })
       );
     } else {
+      // not Pant
       if (!selectedSize) {
         notifyWarning(Resources["selectSizeFirst"][currentLanguage]);
         return;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSearchQuery } from "../../redux/slices/search-slice";
-const keywords = ["Nifous", "Nifous 22", "Carg", "Jean"];
+const keywords = ["Nifous", "Nifous 22", "Carg", "Jean", "Mah"];
 const getProductsWithColors = (products) => {
   return products.flatMap((product) =>
     product.colorPanel.map((panel) => ({

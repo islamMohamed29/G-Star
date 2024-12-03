@@ -1,7 +1,11 @@
+@import "../abstracts/mixins";
 .checkout_cart {
   background-color: #f6f6f6;
   .container {
     padding: 0 80px;
+    @include media(small) {
+      padding: 0 30px;
+    }
   }
   .section_checkOut {
     padding-bottom: 80px;
@@ -30,6 +34,11 @@
       justify-content: space-between;
       align-items: center;
       padding: 30px 0;
+      @include media(small) {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+      }
       &.no_items {
         justify-content: center;
       }
@@ -93,6 +102,9 @@
               .price {
                 margin: 0;
                 font-weight: bold;
+                @include media(small) {
+                  font-size: 13px;
+                }
               }
               .quantity {
                 display: flex;

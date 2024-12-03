@@ -99,7 +99,7 @@ export default function CheckOut() {
               className={`head_section ${!cartData.length > 0 && "no_items"}`}
             >
               {cartData.length > 0 && (
-                <Link to={"/shop"} className={`header_link `}>
+                <Link to={"/shop"} className={`header_link`}>
                   <span className="icon_left">
                     <i class="fa-solid fa-chevron-left"></i>
                   </span>
@@ -123,7 +123,7 @@ export default function CheckOut() {
             </div>
             {cartData.length > 0 && (
               <div className="row">
-                <div className="col-md-7">
+                <div className="col-12 col-md-7">
                   <div className="grid_wrap">
                     <div className="not_reserved">
                       <span className="icon_left">

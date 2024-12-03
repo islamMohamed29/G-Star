@@ -1,3 +1,5 @@
+@import "../abstracts/mixins";
+
 nav {
   position: fixed;
   top: 0;
@@ -318,16 +320,26 @@ nav
 //   background-color: transparent;
 //   color: #000;
 // }
+
 nav .nav-container .nav-right .cart .shopping-cart .shopping_cart_panel,
 nav .nav-container .nav-right .whishlist .wishlist_panel {
   position: absolute;
   top: 54px;
   right: -20px;
   width: 480px;
+
+  @include media(small) {
+    width: 100vw;
+  }
   // height: 160px;
   background-color: #fff;
   display: none;
   cursor: default;
+}
+nav .nav-container .nav-right .whishlist .wishlist_panel {
+  @include media(small) {
+    right: -90px;
+  }
 }
 nav .nav-container .nav-right .cart .shopping-cart .shopping_cart_panel {
   min-height: 140px;
