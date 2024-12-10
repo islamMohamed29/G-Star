@@ -23,7 +23,7 @@ const Product = ({ product }) => {
   };
 
   return (
-    <div className="col-md-3">
+    <div className="col-lg-3 col-md-6 col-sm-6 col-12">
       <div className="product">
         {/* <Link to={`/shop/product/${product.id}`}> */}
         <Link to={`/shop${productUrl}`}>

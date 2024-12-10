@@ -37,7 +37,7 @@ export default function Home() {
             />
           </picture>
           <div className="buttons">
-            <Link href="#">shop men</Link>
+            <Link to="shop">shop men</Link>
           </div>
         </header>
         <section className="new-arrivals">

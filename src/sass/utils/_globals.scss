@@ -54,3 +54,10 @@ ul.parentFilterPanel {
     transition: 0.2s ease-in;
   }
 }
+
+@media (max-width: 1200px) {
+  .custom-container.nav-open {
+    width: 100%;
+    margin-left: 0;
+  }
+}
